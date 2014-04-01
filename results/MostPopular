@@ -1,0 +1,11 @@
+2014-03-22 11:07:59 Read rating data...
+Number of ratings: 100000, Number of users: 943, Number of items: 1682
+Initialize a most popular based recommendation model.
+Save the model.
+2014-03-22 11:08:01
+Precision@N: 0.1901378579003174
+Recall@N: 0.11610395249734211
+MAP@N: 0.13995438401588983
+MRR@N: 0.4105501691662874
+NDCG@N: 0.4771243478947964
+AUC@N: 0.7620863747304366

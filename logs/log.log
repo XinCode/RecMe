@@ -1,0 +1,156 @@
+2014-03-13 16:31:49  [ main:0 ] - [ DEBUG ]  FileName set to ItemAverage.properties
+2014-03-13 16:31:49  [ main:5 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:49  [ main:13 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is ItemAverage.properties
+2014-03-13 16:31:49  [ main:15 ] - [ DEBUG ]  Could not locate file ItemAverage.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:49  [ main:19 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\ItemAverage.properties
+2014-03-13 16:31:49  [ main:43 ] - [ INFO ]  Read rating data...
+2014-03-13 16:31:50  [ main:1035 ] - [ INFO ]  5- folder cross validation.
+2014-03-13 16:31:51  [ main:1869 ] - [ INFO ]  Folder: 1
+2014-03-13 16:31:51  [ main:1872 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:31:51  [ main:1873 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:31:51  [ main:1873 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:51  [ main:1873 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:31:51  [ main:1873 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:51  [ main:1874 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:31:51  [ main:1875 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:31:51  [ main:1884 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:31:51  [ main:1907 ] - [ INFO ]  Folder: 2
+2014-03-13 16:31:51  [ main:1909 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:31:51  [ main:1909 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:31:51  [ main:1909 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:51  [ main:1909 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:31:51  [ main:1910 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:51  [ main:1911 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:31:51  [ main:1912 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:31:51  [ main:1914 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:31:51  [ main:2110 ] - [ INFO ]  Folder: 3
+2014-03-13 16:31:51  [ main:2111 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:31:51  [ main:2111 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:31:51  [ main:2111 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:51  [ main:2111 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:31:51  [ main:2111 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:51  [ main:2112 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:31:51  [ main:2112 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:31:51  [ main:2114 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:31:51  [ main:2120 ] - [ INFO ]  Folder: 4
+2014-03-13 16:31:51  [ main:2121 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:31:51  [ main:2122 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:31:51  [ main:2122 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:51  [ main:2122 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:31:51  [ main:2122 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:51  [ main:2123 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:31:51  [ main:2123 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:31:51  [ main:2125 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:31:51  [ main:2130 ] - [ INFO ]  Folder: 5
+2014-03-13 16:31:51  [ main:2131 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:31:51  [ main:2131 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:31:51  [ main:2131 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:31:51  [ main:2131 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:31:51  [ main:2132 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:31:51  [ main:2132 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:31:51  [ main:2133 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:31:51  [ main:2136 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:34:21  [ main:0 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:21  [ main:4 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:21  [ main:10 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:21  [ main:11 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:21  [ main:14 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:21  [ main:38 ] - [ INFO ]  Read rating data...
+2014-03-13 16:34:22  [ main:966 ] - [ INFO ]  5- folder cross validation.
+2014-03-13 16:34:23  [ main:1878 ] - [ INFO ]  Folder: 1
+2014-03-13 16:34:23  [ main:1881 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:34:23  [ main:1881 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:23  [ main:1881 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:23  [ main:1881 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:23  [ main:1882 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:23  [ main:1882 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:23  [ main:1883 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:34:23  [ main:1891 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:34:23  [ main:1914 ] - [ INFO ]  Folder: 2
+2014-03-13 16:34:23  [ main:1916 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:34:23  [ main:1916 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:23  [ main:1916 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:23  [ main:1916 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:23  [ main:1917 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:23  [ main:1918 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:23  [ main:1919 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:34:23  [ main:1921 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:34:23  [ main:1939 ] - [ INFO ]  Folder: 3
+2014-03-13 16:34:23  [ main:1941 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:34:23  [ main:1941 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:23  [ main:1941 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:23  [ main:1941 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:23  [ main:1942 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:23  [ main:1943 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:23  [ main:1944 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:34:23  [ main:1946 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:34:23  [ main:1962 ] - [ INFO ]  Folder: 4
+2014-03-13 16:34:23  [ main:1964 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:34:23  [ main:1964 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:23  [ main:1964 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:23  [ main:1965 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:23  [ main:1965 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:23  [ main:1966 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:23  [ main:1967 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:34:23  [ main:1968 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:34:23  [ main:1984 ] - [ INFO ]  Folder: 5
+2014-03-13 16:34:23  [ main:1986 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:34:23  [ main:1986 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:34:23  [ main:1986 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:34:23  [ main:1986 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:34:23  [ main:1987 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:34:23  [ main:1987 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:34:23  [ main:1988 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:34:23  [ main:1990 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:38:24  [ main:0 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:24  [ main:2 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\conf
+2014-03-13 16:38:24  [ main:10 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\conf, name is GlobalMean.properties
+2014-03-13 16:38:24  [ main:12 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\conf: unknown protocol: c
+2014-03-13 16:38:24  [ main:15 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\conf\GlobalMean.properties
+2014-03-13 16:38:25  [ main:36 ] - [ INFO ]  Read rating data...
+2014-03-13 16:38:26  [ main:1027 ] - [ INFO ]  5- folder cross validation.
+2014-03-13 16:38:26  [ main:1867 ] - [ INFO ]  Folder: 1
+2014-03-13 16:38:26  [ main:1869 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:38:26  [ main:1869 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:26  [ main:1869 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:38:26  [ main:1869 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:38:26  [ main:1870 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:38:26  [ main:1870 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:38:26  [ main:1871 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:38:26  [ main:1879 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:38:26  [ main:1902 ] - [ INFO ]  Folder: 2
+2014-03-13 16:38:26  [ main:1904 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:38:26  [ main:1904 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:26  [ main:1905 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:38:26  [ main:1905 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:38:26  [ main:1905 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:38:26  [ main:1906 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:38:26  [ main:1907 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:38:26  [ main:1910 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:38:26  [ main:1982 ] - [ INFO ]  Folder: 3
+2014-03-13 16:38:26  [ main:1984 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:38:26  [ main:1984 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:26  [ main:1984 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:38:26  [ main:1985 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:38:26  [ main:1985 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:38:26  [ main:1989 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:38:26  [ main:1990 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:38:26  [ main:1992 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:38:26  [ main:1998 ] - [ INFO ]  Folder: 4
+2014-03-13 16:38:26  [ main:2000 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:38:26  [ main:2000 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:26  [ main:2000 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:38:26  [ main:2001 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:38:26  [ main:2001 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:38:26  [ main:2002 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:38:26  [ main:2003 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:38:26  [ main:2005 ] - [ INFO ]  Save the model to a local file.
+2014-03-13 16:38:26  [ main:2011 ] - [ INFO ]  Folder: 5
+2014-03-13 16:38:26  [ main:2013 ] - [ INFO ]  Initialize a recommendation model based on global average method.
+2014-03-13 16:38:26  [ main:2014 ] - [ DEBUG ]  FileName set to GlobalMean.properties
+2014-03-13 16:38:26  [ main:2014 ] - [ DEBUG ]  Base path set to C:\Users\liu2\Dropbox\private\RecLib\.\conf
+2014-03-13 16:38:26  [ main:2014 ] - [ DEBUG ]  ConfigurationUtils.locate(): base is C:\Users\liu2\Dropbox\private\RecLib\.\conf, name is GlobalMean.properties
+2014-03-13 16:38:26  [ main:2015 ] - [ DEBUG ]  Could not locate file GlobalMean.properties at C:\Users\liu2\Dropbox\private\RecLib\.\conf: unknown protocol: c
+2014-03-13 16:38:26  [ main:2015 ] - [ DEBUG ]  Loading configuration from the path C:\Users\liu2\Dropbox\private\RecLib\.\conf\GlobalMean.properties
+2014-03-13 16:38:26  [ main:2017 ] - [ INFO ]  A global average based recommendation model is built.
+2014-03-13 16:38:26  [ main:2019 ] - [ INFO ]  Save the model to a local file.

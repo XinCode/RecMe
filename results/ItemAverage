@@ -1,0 +1,24 @@
+2014-03-22 10:54:53 Read rating data...
+Number of ratings: 100000, Number of users: 943, Number of items: 1682
+5- folder cross validation.
+Folder: 1
+Initialize a recommendation model based on item average method.
+Save the model.
+2014-03-22 10:54:55 MAE: 0.8178709307943495 RMSE: 1.0255032696141064
+Folder: 2
+Initialize a recommendation model based on item average method.
+Save the model.
+2014-03-22 10:54:56 MAE: 0.8223094787622965 RMSE: 1.0295074418327699
+Folder: 3
+Initialize a recommendation model based on item average method.
+Save the model.
+2014-03-22 10:54:57 MAE: 0.8125174444817717 RMSE: 1.0185543835448776
+Folder: 4
+Initialize a recommendation model based on item average method.
+Save the model.
+2014-03-22 10:54:58 MAE: 0.8189382531949373 RMSE: 1.0275033749084694
+Folder: 5
+Initialize a recommendation model based on item average method.
+Save the model.
+2014-03-22 10:54:59 MAE: 0.8158589451994837 RMSE: 1.0236234336778722
+2014-03-22 10:54:59 Final results: MAE: 0.8174990104865676 RMSE: 1.0249383807156192

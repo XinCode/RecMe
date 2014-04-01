@@ -1,0 +1,863 @@
+2014-03-22 16:37:46 Read rating data...
+Number of ratings: 100000, Number of users: 943, Number of items: 1682
+5- folder cross validation.
+Folder: 1
+Initialize a matrix factorization based recommendation model.
+2014-03-22 16:37:50 Iteration 0 : Error ~ 69436.76232657376
+Increase learning rate by 5%.
+2014-03-22 16:37:52 Iteration 1 : Error ~ 66410.13337697036
+Increase learning rate by 5%.
+2014-03-22 16:37:55 Iteration 2 : Error ~ 64610.806903658566
+Increase learning rate by 5%.
+2014-03-22 16:37:57 Iteration 3 : Error ~ 63390.116286186596
+Increase learning rate by 5%.
+2014-03-22 16:38:00 Iteration 4 : Error ~ 62460.356908807706
+Increase learning rate by 5%.
+2014-03-22 16:38:02 Iteration 5 : Error ~ 61772.743409913906
+Increase learning rate by 5%.
+2014-03-22 16:38:04 Iteration 6 : Error ~ 61103.96351418282
+Increase learning rate by 5%.
+2014-03-22 16:38:07 Iteration 7 : Error ~ 60660.99196242337
+Increase learning rate by 5%.
+2014-03-22 16:38:09 Iteration 8 : Error ~ 60215.138541290966
+Increase learning rate by 5%.
+2014-03-22 16:38:11 Iteration 9 : Error ~ 59843.81793818843
+Increase learning rate by 5%.
+2014-03-22 16:38:14 Iteration 10 : Error ~ 59416.605639919195
+Increase learning rate by 5%.
+2014-03-22 16:38:16 Iteration 11 : Error ~ 59059.86895583213
+Increase learning rate by 5%.
+2014-03-22 16:38:18 Iteration 12 : Error ~ 58706.527459558165
+Increase learning rate by 5%.
+2014-03-22 16:38:21 Iteration 13 : Error ~ 58443.101328910976
+Increase learning rate by 5%.
+2014-03-22 16:38:23 Iteration 14 : Error ~ 58110.90813328946
+Increase learning rate by 5%.
+2014-03-22 16:38:25 Iteration 15 : Error ~ 57722.3821282989
+Increase learning rate by 5%.
+2014-03-22 16:38:28 Iteration 16 : Error ~ 57467.34606244728
+Increase learning rate by 5%.
+2014-03-22 16:38:30 Iteration 17 : Error ~ 57229.85209153113
+Increase learning rate by 5%.
+2014-03-22 16:38:32 Iteration 18 : Error ~ 56881.97986105477
+Increase learning rate by 5%.
+2014-03-22 16:38:35 Iteration 19 : Error ~ 56520.187177429565
+Increase learning rate by 5%.
+2014-03-22 16:38:37 Iteration 20 : Error ~ 56115.54291051948
+Increase learning rate by 5%.
+2014-03-22 16:38:40 Iteration 21 : Error ~ 55810.02809125897
+Increase learning rate by 5%.
+2014-03-22 16:38:42 Iteration 22 : Error ~ 55476.803330035495
+Increase learning rate by 5%.
+2014-03-22 16:38:44 Iteration 23 : Error ~ 55127.50475219055
+Increase learning rate by 5%.
+2014-03-22 16:38:47 Iteration 24 : Error ~ 54840.451116441305
+Increase learning rate by 5%.
+2014-03-22 16:38:49 Iteration 25 : Error ~ 54503.37119942632
+Increase learning rate by 5%.
+2014-03-22 16:38:51 Iteration 26 : Error ~ 54203.832712954194
+Increase learning rate by 5%.
+2014-03-22 16:38:54 Iteration 27 : Error ~ 53952.62712307239
+Increase learning rate by 5%.
+2014-03-22 16:38:56 Iteration 28 : Error ~ 53755.98692806397
+Increase learning rate by 5%.
+2014-03-22 16:38:58 Iteration 29 : Error ~ 53560.049631702575
+Increase learning rate by 5%.
+2014-03-22 16:39:01 Iteration 30 : Error ~ 53272.62215894516
+Increase learning rate by 5%.
+2014-03-22 16:39:03 Iteration 31 : Error ~ 53025.439553582226
+Increase learning rate by 5%.
+2014-03-22 16:39:05 Iteration 32 : Error ~ 52829.54680079481
+Increase learning rate by 5%.
+2014-03-22 16:39:08 Iteration 33 : Error ~ 52593.17136982033
+Increase learning rate by 5%.
+2014-03-22 16:39:10 Iteration 34 : Error ~ 52410.828475560746
+Increase learning rate by 5%.
+2014-03-22 16:39:13 Iteration 35 : Error ~ 52204.54801518177
+Increase learning rate by 5%.
+2014-03-22 16:39:15 Iteration 36 : Error ~ 52099.06189175676
+Increase learning rate by 5%.
+2014-03-22 16:39:17 Iteration 37 : Error ~ 51945.52350666652
+Increase learning rate by 5%.
+2014-03-22 16:39:20 Iteration 38 : Error ~ 51885.62528429008
+Increase learning rate by 5%.
+2014-03-22 16:39:22 Iteration 39 : Error ~ 51834.04427126928
+Increase learning rate by 5%.
+2014-03-22 16:39:24 Iteration 40 : Error ~ 51700.137358791486
+Increase learning rate by 5%.
+2014-03-22 16:39:27 Iteration 41 : Error ~ 51524.55734418577
+Increase learning rate by 5%.
+2014-03-22 16:39:29 Iteration 42 : Error ~ 51505.6825353182
+Increase learning rate by 5%.
+2014-03-22 16:39:31 Iteration 43 : Error ~ 51604.28512565149
+Decrease learning rate by 50%.
+2014-03-22 16:39:34 Iteration 44 : Error ~ 51316.8337494078
+Increase learning rate by 5%.
+2014-03-22 16:39:36 Iteration 45 : Error ~ 51148.74742891299
+Increase learning rate by 5%.
+2014-03-22 16:39:38 Iteration 46 : Error ~ 51078.44637493428
+Increase learning rate by 5%.
+2014-03-22 16:39:41 Iteration 47 : Error ~ 51114.00375067175
+Decrease learning rate by 50%.
+2014-03-22 16:39:43 Iteration 48 : Error ~ 51087.748747798454
+Increase learning rate by 5%.
+2014-03-22 16:39:45 Iteration 49 : Error ~ 51031.7190849705
+Increase learning rate by 5%.
+2014-03-22 16:39:48 Iteration 50 : Error ~ 50957.34641109411
+Increase learning rate by 5%.
+2014-03-22 16:39:50 Iteration 51 : Error ~ 50898.44468042946
+Increase learning rate by 5%.
+2014-03-22 16:39:52 Iteration 52 : Error ~ 50824.241566751785
+Increase learning rate by 5%.
+2014-03-22 16:39:55 Iteration 53 : Error ~ 50896.35352140002
+Decrease learning rate by 50%.
+2014-03-22 16:39:57 Iteration 54 : Error ~ 50852.45066187299
+Increase learning rate by 5%.
+2014-03-22 16:39:59 Iteration 55 : Error ~ 50871.136875134405
+Decrease learning rate by 50%.
+2014-03-22 16:40:02 Iteration 56 : Error ~ 50794.1024379171
+Increase learning rate by 5%.
+2014-03-22 16:40:04 Iteration 57 : Error ~ 50799.30461649814
+Decrease learning rate by 50%.
+2014-03-22 16:40:06 Iteration 58 : Error ~ 50786.10792803842
+Increase learning rate by 5%.
+2014-03-22 16:40:09 Iteration 59 : Error ~ 50777.84112153825
+Increase learning rate by 5%.
+2014-03-22 16:40:11 Iteration 60 : Error ~ 50771.940612078964
+Increase learning rate by 5%.
+2014-03-22 16:40:13 Iteration 61 : Error ~ 50739.55277942778
+Increase learning rate by 5%.
+2014-03-22 16:40:16 Iteration 62 : Error ~ 50746.15443847041
+Decrease learning rate by 50%.
+2014-03-22 16:40:18 Iteration 63 : Error ~ 50747.615733483944
+Decrease learning rate by 50%.
+2014-03-22 16:40:21 Iteration 64 : Error ~ 50748.97287269096
+Decrease learning rate by 50%.
+2014-03-22 16:40:23 Iteration 65 : Error ~ 50746.53804696451
+Increase learning rate by 5%.
+2014-03-22 16:40:25 Iteration 66 : Error ~ 50747.339585553455
+Decrease learning rate by 50%.
+2014-03-22 16:40:28 Iteration 67 : Error ~ 50746.65810876075
+Increase learning rate by 5%.
+2014-03-22 16:40:30 Iteration 68 : Error ~ 50747.61154298721
+Decrease learning rate by 50%.
+2014-03-22 16:40:33 Iteration 69 : Error ~ 50747.305035542515
+Increase learning rate by 5%.
+2014-03-22 16:40:35 Iteration 70 : Error ~ 50747.637445003435
+Decrease learning rate by 50%.
+2014-03-22 16:40:37 Iteration 71 : Error ~ 50747.426792552855
+Increase learning rate by 5%.
+2014-03-22 16:40:40 Iteration 72 : Error ~ 50747.590549338536
+Decrease learning rate by 50%.
+2014-03-22 16:40:42 Iteration 73 : Error ~ 50747.48421054696
+Increase learning rate by 5%.
+2014-03-22 16:40:44 Iteration 74 : Error ~ 50747.56350347971
+Decrease learning rate by 50%.
+2014-03-22 16:40:46 Iteration 75 : Error ~ 50747.51214006987
+Increase learning rate by 5%.
+2014-03-22 16:40:49 Iteration 76 : Error ~ 50747.54006519803
+Decrease learning rate by 50%.
+2014-03-22 16:40:51 Iteration 77 : Error ~ 50747.52583319815
+Increase learning rate by 5%.
+2014-03-22 16:40:53 Iteration 78 : Error ~ 50747.54207830649
+Decrease learning rate by 50%.
+2014-03-22 16:40:56 Iteration 79 : Error ~ 50747.533100173765
+The algorithm convergences.
+SGD is used to train the model.
+Save the model.
+2014-03-22 16:40:56 Folder --- MAE: 0.7161856144069723 RMSE: 0.9179995168977425
+Folder --- precision: 0.07613997879109242 recall: 0.014774216202348135 map: 0.06132909155178509 ndcg: 0.16918925538269666 mrr: 0.13930717568045242 auc: 0.6128421671765448
+Folder: 2
+Initialize a matrix factorization based recommendation model.
+2014-03-22 16:41:03 Iteration 0 : Error ~ 69618.02107857351
+Increase learning rate by 5%.
+2014-03-22 16:41:05 Iteration 1 : Error ~ 66381.86565600419
+Increase learning rate by 5%.
+2014-03-22 16:41:07 Iteration 2 : Error ~ 64618.82519103787
+Increase learning rate by 5%.
+2014-03-22 16:41:10 Iteration 3 : Error ~ 63431.22181806848
+Increase learning rate by 5%.
+2014-03-22 16:41:12 Iteration 4 : Error ~ 62487.44642826414
+Increase learning rate by 5%.
+2014-03-22 16:41:14 Iteration 5 : Error ~ 61762.05899874069
+Increase learning rate by 5%.
+2014-03-22 16:41:16 Iteration 6 : Error ~ 61128.485168361825
+Increase learning rate by 5%.
+2014-03-22 16:41:19 Iteration 7 : Error ~ 60593.17956291077
+Increase learning rate by 5%.
+2014-03-22 16:41:21 Iteration 8 : Error ~ 60205.16198267228
+Increase learning rate by 5%.
+2014-03-22 16:41:23 Iteration 9 : Error ~ 59730.99625175137
+Increase learning rate by 5%.
+2014-03-22 16:41:26 Iteration 10 : Error ~ 59368.29351434103
+Increase learning rate by 5%.
+2014-03-22 16:41:28 Iteration 11 : Error ~ 58957.37156901519
+Increase learning rate by 5%.
+2014-03-22 16:41:30 Iteration 12 : Error ~ 58658.87230016595
+Increase learning rate by 5%.
+2014-03-22 16:41:33 Iteration 13 : Error ~ 58406.59449447097
+Increase learning rate by 5%.
+2014-03-22 16:41:35 Iteration 14 : Error ~ 57963.780185989744
+Increase learning rate by 5%.
+2014-03-22 16:41:37 Iteration 15 : Error ~ 57657.995840546
+Increase learning rate by 5%.
+2014-03-22 16:41:40 Iteration 16 : Error ~ 57360.46044953142
+Increase learning rate by 5%.
+2014-03-22 16:41:42 Iteration 17 : Error ~ 57047.423208935455
+Increase learning rate by 5%.
+2014-03-22 16:41:45 Iteration 18 : Error ~ 56763.642514554806
+Increase learning rate by 5%.
+2014-03-22 16:41:47 Iteration 19 : Error ~ 56469.812616411284
+Increase learning rate by 5%.
+2014-03-22 16:41:49 Iteration 20 : Error ~ 56100.783842439814
+Increase learning rate by 5%.
+2014-03-22 16:41:52 Iteration 21 : Error ~ 55791.71614515754
+Increase learning rate by 5%.
+2014-03-22 16:41:54 Iteration 22 : Error ~ 55423.81777416464
+Increase learning rate by 5%.
+2014-03-22 16:41:56 Iteration 23 : Error ~ 55164.62475422605
+Increase learning rate by 5%.
+2014-03-22 16:41:59 Iteration 24 : Error ~ 54740.942219131284
+Increase learning rate by 5%.
+2014-03-22 16:42:01 Iteration 25 : Error ~ 54463.36963740925
+Increase learning rate by 5%.
+2014-03-22 16:42:03 Iteration 26 : Error ~ 54092.124353223924
+Increase learning rate by 5%.
+2014-03-22 16:42:05 Iteration 27 : Error ~ 53877.91718903614
+Increase learning rate by 5%.
+2014-03-22 16:42:08 Iteration 28 : Error ~ 53500.22079955253
+Increase learning rate by 5%.
+2014-03-22 16:42:10 Iteration 29 : Error ~ 53281.94415319951
+Increase learning rate by 5%.
+2014-03-22 16:42:12 Iteration 30 : Error ~ 52939.68919279558
+Increase learning rate by 5%.
+2014-03-22 16:42:15 Iteration 31 : Error ~ 52782.76853747377
+Increase learning rate by 5%.
+2014-03-22 16:42:17 Iteration 32 : Error ~ 52592.241416483565
+Increase learning rate by 5%.
+2014-03-22 16:42:19 Iteration 33 : Error ~ 52364.14038199974
+Increase learning rate by 5%.
+2014-03-22 16:42:22 Iteration 34 : Error ~ 52191.62623929801
+Increase learning rate by 5%.
+2014-03-22 16:42:24 Iteration 35 : Error ~ 51956.88440704821
+Increase learning rate by 5%.
+2014-03-22 16:42:26 Iteration 36 : Error ~ 51936.38703231642
+Increase learning rate by 5%.
+2014-03-22 16:42:29 Iteration 37 : Error ~ 51739.20751419388
+Increase learning rate by 5%.
+2014-03-22 16:42:31 Iteration 38 : Error ~ 51454.35446742914
+Increase learning rate by 5%.
+2014-03-22 16:42:33 Iteration 39 : Error ~ 51532.66699259371
+Decrease learning rate by 50%.
+2014-03-22 16:42:36 Iteration 40 : Error ~ 51324.396353859665
+Increase learning rate by 5%.
+2014-03-22 16:42:38 Iteration 41 : Error ~ 51311.50669903692
+Increase learning rate by 5%.
+2014-03-22 16:42:40 Iteration 42 : Error ~ 51220.14924728629
+Increase learning rate by 5%.
+2014-03-22 16:42:43 Iteration 43 : Error ~ 51123.8746352043
+Increase learning rate by 5%.
+2014-03-22 16:42:45 Iteration 44 : Error ~ 50982.15483333803
+Increase learning rate by 5%.
+2014-03-22 16:42:47 Iteration 45 : Error ~ 51013.71422833125
+Decrease learning rate by 50%.
+2014-03-22 16:42:50 Iteration 46 : Error ~ 51027.144890887335
+Decrease learning rate by 50%.
+2014-03-22 16:42:52 Iteration 47 : Error ~ 51002.091592785306
+Increase learning rate by 5%.
+2014-03-22 16:42:54 Iteration 48 : Error ~ 50937.23792755932
+Increase learning rate by 5%.
+2014-03-22 16:42:57 Iteration 49 : Error ~ 50915.79724061763
+Increase learning rate by 5%.
+2014-03-22 16:42:59 Iteration 50 : Error ~ 50951.78437456672
+Decrease learning rate by 50%.
+2014-03-22 16:43:01 Iteration 51 : Error ~ 50889.74851720379
+Increase learning rate by 5%.
+2014-03-22 16:43:03 Iteration 52 : Error ~ 50894.58752634952
+Decrease learning rate by 50%.
+2014-03-22 16:43:06 Iteration 53 : Error ~ 50898.13870797472
+Decrease learning rate by 50%.
+2014-03-22 16:43:08 Iteration 54 : Error ~ 50893.28661735912
+Increase learning rate by 5%.
+2014-03-22 16:43:10 Iteration 55 : Error ~ 50903.62321406819
+Decrease learning rate by 50%.
+2014-03-22 16:43:13 Iteration 56 : Error ~ 50898.42675366967
+Increase learning rate by 5%.
+2014-03-22 16:43:15 Iteration 57 : Error ~ 50897.83399550946
+Increase learning rate by 5%.
+2014-03-22 16:43:17 Iteration 58 : Error ~ 50887.72141854952
+Increase learning rate by 5%.
+2014-03-22 16:43:20 Iteration 59 : Error ~ 50888.53538509909
+Decrease learning rate by 50%.
+2014-03-22 16:43:22 Iteration 60 : Error ~ 50889.103158751546
+Decrease learning rate by 50%.
+2014-03-22 16:43:24 Iteration 61 : Error ~ 50888.880196067075
+Increase learning rate by 5%.
+2014-03-22 16:43:27 Iteration 62 : Error ~ 50888.7743955244
+Increase learning rate by 5%.
+2014-03-22 16:43:29 Iteration 63 : Error ~ 50888.90907839991
+Decrease learning rate by 50%.
+2014-03-22 16:43:31 Iteration 64 : Error ~ 50888.735382961386
+Increase learning rate by 5%.
+2014-03-22 16:43:34 Iteration 65 : Error ~ 50888.694215818185
+Increase learning rate by 5%.
+2014-03-22 16:43:36 Iteration 66 : Error ~ 50888.50857148084
+Increase learning rate by 5%.
+2014-03-22 16:43:38 Iteration 67 : Error ~ 50888.35802490348
+Increase learning rate by 5%.
+2014-03-22 16:43:41 Iteration 68 : Error ~ 50888.21523608123
+Increase learning rate by 5%.
+2014-03-22 16:43:43 Iteration 69 : Error ~ 50887.564617625816
+Increase learning rate by 5%.
+2014-03-22 16:43:45 Iteration 70 : Error ~ 50887.011082985846
+Increase learning rate by 5%.
+2014-03-22 16:43:48 Iteration 71 : Error ~ 50886.747847129234
+Increase learning rate by 5%.
+2014-03-22 16:43:50 Iteration 72 : Error ~ 50885.79367146388
+Increase learning rate by 5%.
+2014-03-22 16:43:52 Iteration 73 : Error ~ 50885.08940252056
+Increase learning rate by 5%.
+2014-03-22 16:43:55 Iteration 74 : Error ~ 50884.378719144326
+Increase learning rate by 5%.
+2014-03-22 16:43:57 Iteration 75 : Error ~ 50883.97471933598
+Increase learning rate by 5%.
+2014-03-22 16:43:59 Iteration 76 : Error ~ 50883.35325199679
+Increase learning rate by 5%.
+2014-03-22 16:44:02 Iteration 77 : Error ~ 50882.06183574681
+Increase learning rate by 5%.
+2014-03-22 16:44:04 Iteration 78 : Error ~ 50881.262209042165
+Increase learning rate by 5%.
+2014-03-22 16:44:07 Iteration 79 : Error ~ 50880.53960035114
+Increase learning rate by 5%.
+2014-03-22 16:44:09 Iteration 80 : Error ~ 50879.358006187336
+Increase learning rate by 5%.
+2014-03-22 16:44:11 Iteration 81 : Error ~ 50879.2706816634
+Increase learning rate by 5%.
+2014-03-22 16:44:14 Iteration 82 : Error ~ 50877.88086404349
+Increase learning rate by 5%.
+2014-03-22 16:44:16 Iteration 83 : Error ~ 50877.734670693695
+Increase learning rate by 5%.
+2014-03-22 16:44:18 Iteration 84 : Error ~ 50876.73585629122
+Increase learning rate by 5%.
+2014-03-22 16:44:21 Iteration 85 : Error ~ 50874.556134801875
+Increase learning rate by 5%.
+2014-03-22 16:44:23 Iteration 86 : Error ~ 50873.47196389029
+Increase learning rate by 5%.
+2014-03-22 16:44:25 Iteration 87 : Error ~ 50872.12925275729
+Increase learning rate by 5%.
+2014-03-22 16:44:28 Iteration 88 : Error ~ 50869.34934065985
+Increase learning rate by 5%.
+2014-03-22 16:44:30 Iteration 89 : Error ~ 50867.566636572694
+Increase learning rate by 5%.
+2014-03-22 16:44:33 Iteration 90 : Error ~ 50867.439906581734
+Increase learning rate by 5%.
+2014-03-22 16:44:35 Iteration 91 : Error ~ 50865.661067599
+Increase learning rate by 5%.
+2014-03-22 16:44:37 Iteration 92 : Error ~ 50864.1167439928
+Increase learning rate by 5%.
+2014-03-22 16:44:40 Iteration 93 : Error ~ 50863.21556497727
+Increase learning rate by 5%.
+2014-03-22 16:44:42 Iteration 94 : Error ~ 50860.04093378523
+Increase learning rate by 5%.
+2014-03-22 16:44:44 Iteration 95 : Error ~ 50859.1521928224
+Increase learning rate by 5%.
+2014-03-22 16:44:47 Iteration 96 : Error ~ 50856.49124330012
+Increase learning rate by 5%.
+2014-03-22 16:44:49 Iteration 97 : Error ~ 50854.220814075525
+Increase learning rate by 5%.
+2014-03-22 16:44:51 Iteration 98 : Error ~ 50850.97025515228
+Increase learning rate by 5%.
+2014-03-22 16:44:54 Iteration 99 : Error ~ 50849.7211485527
+Increase learning rate by 5%.
+SGD is used to train the model.
+Save the model.
+2014-03-22 16:44:54 Folder --- MAE: 0.7144169155932344 RMSE: 0.9108315329208351
+Folder --- precision: 0.07847295864263017 recall: 0.017314296861851645 map: 0.07308236125839518 ndcg: 0.18494594325105712 mrr: 0.1568221986567692 auc: 0.6202857246967871
+Folder: 3
+Initialize a matrix factorization based recommendation model.
+2014-03-22 16:45:00 Iteration 0 : Error ~ 69564.1767953883
+Increase learning rate by 5%.
+2014-03-22 16:45:03 Iteration 1 : Error ~ 66474.29677204591
+Increase learning rate by 5%.
+2014-03-22 16:45:05 Iteration 2 : Error ~ 64805.082971731215
+Increase learning rate by 5%.
+2014-03-22 16:45:07 Iteration 3 : Error ~ 63655.65157429451
+Increase learning rate by 5%.
+2014-03-22 16:45:10 Iteration 4 : Error ~ 62749.020755407255
+Increase learning rate by 5%.
+2014-03-22 16:45:12 Iteration 5 : Error ~ 61919.623180777264
+Increase learning rate by 5%.
+2014-03-22 16:45:14 Iteration 6 : Error ~ 61328.416965404605
+Increase learning rate by 5%.
+2014-03-22 16:45:17 Iteration 7 : Error ~ 60887.892707541956
+Increase learning rate by 5%.
+2014-03-22 16:45:19 Iteration 8 : Error ~ 60400.47655418347
+Increase learning rate by 5%.
+2014-03-22 16:45:22 Iteration 9 : Error ~ 59982.91599083788
+Increase learning rate by 5%.
+2014-03-22 16:45:24 Iteration 10 : Error ~ 59637.08615152485
+Increase learning rate by 5%.
+2014-03-22 16:45:26 Iteration 11 : Error ~ 59157.92370445942
+Increase learning rate by 5%.
+2014-03-22 16:45:29 Iteration 12 : Error ~ 58865.98965581615
+Increase learning rate by 5%.
+2014-03-22 16:45:31 Iteration 13 : Error ~ 58601.08063623255
+Increase learning rate by 5%.
+2014-03-22 16:45:33 Iteration 14 : Error ~ 58372.934676764446
+Increase learning rate by 5%.
+2014-03-22 16:45:36 Iteration 15 : Error ~ 57985.160159639534
+Increase learning rate by 5%.
+2014-03-22 16:45:38 Iteration 16 : Error ~ 57631.076398755526
+Increase learning rate by 5%.
+2014-03-22 16:45:40 Iteration 17 : Error ~ 57309.80671959822
+Increase learning rate by 5%.
+2014-03-22 16:45:43 Iteration 18 : Error ~ 57007.6441813042
+Increase learning rate by 5%.
+2014-03-22 16:45:45 Iteration 19 : Error ~ 56681.84285348986
+Increase learning rate by 5%.
+2014-03-22 16:45:48 Iteration 20 : Error ~ 56400.52670942876
+Increase learning rate by 5%.
+2014-03-22 16:45:50 Iteration 21 : Error ~ 56113.73739412976
+Increase learning rate by 5%.
+2014-03-22 16:45:52 Iteration 22 : Error ~ 55713.85820828749
+Increase learning rate by 5%.
+2014-03-22 16:45:55 Iteration 23 : Error ~ 55335.844656494904
+Increase learning rate by 5%.
+2014-03-22 16:45:57 Iteration 24 : Error ~ 54981.56126624846
+Increase learning rate by 5%.
+2014-03-22 16:45:59 Iteration 25 : Error ~ 54700.42207618437
+Increase learning rate by 5%.
+2014-03-22 16:46:02 Iteration 26 : Error ~ 54327.728920197354
+Increase learning rate by 5%.
+2014-03-22 16:46:04 Iteration 27 : Error ~ 54085.780351315625
+Increase learning rate by 5%.
+2014-03-22 16:46:07 Iteration 28 : Error ~ 53799.23370084839
+Increase learning rate by 5%.
+2014-03-22 16:46:09 Iteration 29 : Error ~ 53602.22145583995
+Increase learning rate by 5%.
+2014-03-22 16:46:11 Iteration 30 : Error ~ 53367.721689493446
+Increase learning rate by 5%.
+2014-03-22 16:46:14 Iteration 31 : Error ~ 53090.290495092675
+Increase learning rate by 5%.
+2014-03-22 16:46:16 Iteration 32 : Error ~ 52873.91773666143
+Increase learning rate by 5%.
+2014-03-22 16:46:18 Iteration 33 : Error ~ 52628.786238211884
+Increase learning rate by 5%.
+2014-03-22 16:46:21 Iteration 34 : Error ~ 52516.0573784289
+Increase learning rate by 5%.
+2014-03-22 16:46:23 Iteration 35 : Error ~ 52253.22582497616
+Increase learning rate by 5%.
+2014-03-22 16:46:26 Iteration 36 : Error ~ 52259.4046677119
+Decrease learning rate by 50%.
+2014-03-22 16:46:28 Iteration 37 : Error ~ 52154.18579422123
+Increase learning rate by 5%.
+2014-03-22 16:46:30 Iteration 38 : Error ~ 51996.94825416891
+Increase learning rate by 5%.
+2014-03-22 16:46:32 Iteration 39 : Error ~ 51981.106430606844
+Increase learning rate by 5%.
+2014-03-22 16:46:35 Iteration 40 : Error ~ 51919.63415551728
+Increase learning rate by 5%.
+2014-03-22 16:46:37 Iteration 41 : Error ~ 51780.989108386006
+Increase learning rate by 5%.
+2014-03-22 16:46:39 Iteration 42 : Error ~ 51812.33776063986
+Decrease learning rate by 50%.
+2014-03-22 16:46:42 Iteration 43 : Error ~ 51731.155164070384
+Increase learning rate by 5%.
+2014-03-22 16:46:44 Iteration 44 : Error ~ 51671.2821364923
+Increase learning rate by 5%.
+2014-03-22 16:46:46 Iteration 45 : Error ~ 51565.463558328396
+Increase learning rate by 5%.
+2014-03-22 16:46:49 Iteration 46 : Error ~ 51668.75142239056
+Decrease learning rate by 50%.
+2014-03-22 16:46:51 Iteration 47 : Error ~ 51583.250230968144
+Increase learning rate by 5%.
+2014-03-22 16:46:53 Iteration 48 : Error ~ 51538.58867207057
+Increase learning rate by 5%.
+2014-03-22 16:46:56 Iteration 49 : Error ~ 51490.18756773411
+Increase learning rate by 5%.
+2014-03-22 16:46:58 Iteration 50 : Error ~ 51518.14783610736
+Decrease learning rate by 50%.
+2014-03-22 16:47:01 Iteration 51 : Error ~ 51472.90462471263
+Increase learning rate by 5%.
+2014-03-22 16:47:03 Iteration 52 : Error ~ 51473.43808992464
+Decrease learning rate by 50%.
+2014-03-22 16:47:05 Iteration 53 : Error ~ 51488.60308536864
+Decrease learning rate by 50%.
+2014-03-22 16:47:08 Iteration 54 : Error ~ 51484.80056732429
+Increase learning rate by 5%.
+2014-03-22 16:47:10 Iteration 55 : Error ~ 51472.60949449217
+Increase learning rate by 5%.
+2014-03-22 16:47:13 Iteration 56 : Error ~ 51471.34198848873
+Increase learning rate by 5%.
+2014-03-22 16:47:15 Iteration 57 : Error ~ 51467.586838901145
+Increase learning rate by 5%.
+2014-03-22 16:47:18 Iteration 58 : Error ~ 51447.87178778833
+Increase learning rate by 5%.
+2014-03-22 16:47:20 Iteration 59 : Error ~ 51452.66796183532
+Decrease learning rate by 50%.
+2014-03-22 16:47:23 Iteration 60 : Error ~ 51454.1735626545
+Decrease learning rate by 50%.
+2014-03-22 16:47:25 Iteration 61 : Error ~ 51454.12572254524
+Increase learning rate by 5%.
+2014-03-22 16:47:27 Iteration 62 : Error ~ 51456.03285898408
+Decrease learning rate by 50%.
+2014-03-22 16:47:29 Iteration 63 : Error ~ 51455.4283414326
+Increase learning rate by 5%.
+2014-03-22 16:47:32 Iteration 64 : Error ~ 51455.77683502111
+Decrease learning rate by 50%.
+2014-03-22 16:47:34 Iteration 65 : Error ~ 51455.87022606587
+Decrease learning rate by 50%.
+2014-03-22 16:47:36 Iteration 66 : Error ~ 51455.562028592634
+Increase learning rate by 5%.
+2014-03-22 16:47:38 Iteration 67 : Error ~ 51455.74819116138
+Decrease learning rate by 50%.
+2014-03-22 16:47:41 Iteration 68 : Error ~ 51455.645237521676
+Increase learning rate by 5%.
+2014-03-22 16:47:43 Iteration 69 : Error ~ 51455.75101788806
+Decrease learning rate by 50%.
+2014-03-22 16:47:45 Iteration 70 : Error ~ 51455.68384924407
+Increase learning rate by 5%.
+2014-03-22 16:47:47 Iteration 71 : Error ~ 51455.72961588979
+Decrease learning rate by 50%.
+2014-03-22 16:47:50 Iteration 72 : Error ~ 51455.703786971564
+Increase learning rate by 5%.
+2014-03-22 16:47:52 Iteration 73 : Error ~ 51455.72765885035
+Decrease learning rate by 50%.
+2014-03-22 16:47:54 Iteration 74 : Error ~ 51455.713590032
+Increase learning rate by 5%.
+2014-03-22 16:47:56 Iteration 75 : Error ~ 51455.72615249562
+Decrease learning rate by 50%.
+2014-03-22 16:47:59 Iteration 76 : Error ~ 51455.71863825635
+The algorithm convergences.
+SGD is used to train the model.
+Save the model.
+2014-03-22 16:47:59 Folder --- MAE: 0.7154223165346756 RMSE: 0.9128869226159196
+Folder --- precision: 0.07338282078472978 recall: 0.015217389932864415 map: 0.062124425592082005 ndcg: 0.17143533655929996 mrr: 0.1403499469777306 auc: 0.6148362652218945
+Folder: 4
+Initialize a matrix factorization based recommendation model.
+2014-03-22 16:48:05 Iteration 0 : Error ~ 69728.74634700453
+Increase learning rate by 5%.
+2014-03-22 16:48:07 Iteration 1 : Error ~ 66652.22814465292
+Increase learning rate by 5%.
+2014-03-22 16:48:09 Iteration 2 : Error ~ 64932.360513056105
+Increase learning rate by 5%.
+2014-03-22 16:48:11 Iteration 3 : Error ~ 63740.135505067155
+Increase learning rate by 5%.
+2014-03-22 16:48:14 Iteration 4 : Error ~ 62735.125448636034
+Increase learning rate by 5%.
+2014-03-22 16:48:16 Iteration 5 : Error ~ 62112.34782937331
+Increase learning rate by 5%.
+2014-03-22 16:48:18 Iteration 6 : Error ~ 61295.90610353297
+Increase learning rate by 5%.
+2014-03-22 16:48:20 Iteration 7 : Error ~ 60730.004792946944
+Increase learning rate by 5%.
+2014-03-22 16:48:23 Iteration 8 : Error ~ 60278.346401753464
+Increase learning rate by 5%.
+2014-03-22 16:48:25 Iteration 9 : Error ~ 59887.810905740735
+Increase learning rate by 5%.
+2014-03-22 16:48:27 Iteration 10 : Error ~ 59455.73872033829
+Increase learning rate by 5%.
+2014-03-22 16:48:29 Iteration 11 : Error ~ 59052.78958215742
+Increase learning rate by 5%.
+2014-03-22 16:48:32 Iteration 12 : Error ~ 58785.19788430595
+Increase learning rate by 5%.
+2014-03-22 16:48:34 Iteration 13 : Error ~ 58421.9460156526
+Increase learning rate by 5%.
+2014-03-22 16:48:36 Iteration 14 : Error ~ 58032.237207910395
+Increase learning rate by 5%.
+2014-03-22 16:48:38 Iteration 15 : Error ~ 57590.843814388085
+Increase learning rate by 5%.
+2014-03-22 16:48:41 Iteration 16 : Error ~ 57276.587220553076
+Increase learning rate by 5%.
+2014-03-22 16:48:43 Iteration 17 : Error ~ 56884.22317225814
+Increase learning rate by 5%.
+2014-03-22 16:48:45 Iteration 18 : Error ~ 56495.27139398311
+Increase learning rate by 5%.
+2014-03-22 16:48:48 Iteration 19 : Error ~ 56070.5411919805
+Increase learning rate by 5%.
+2014-03-22 16:48:50 Iteration 20 : Error ~ 55729.75193739211
+Increase learning rate by 5%.
+2014-03-22 16:48:53 Iteration 21 : Error ~ 55419.34341352783
+Increase learning rate by 5%.
+2014-03-22 16:48:55 Iteration 22 : Error ~ 55093.340539399156
+Increase learning rate by 5%.
+2014-03-22 16:48:58 Iteration 23 : Error ~ 54763.83186455598
+Increase learning rate by 5%.
+2014-03-22 16:49:00 Iteration 24 : Error ~ 54497.3341854586
+Increase learning rate by 5%.
+2014-03-22 16:49:03 Iteration 25 : Error ~ 54275.78217400449
+Increase learning rate by 5%.
+2014-03-22 16:49:05 Iteration 26 : Error ~ 53993.65454941927
+Increase learning rate by 5%.
+2014-03-22 16:49:07 Iteration 27 : Error ~ 53723.25110912603
+Increase learning rate by 5%.
+2014-03-22 16:49:10 Iteration 28 : Error ~ 53499.76208445944
+Increase learning rate by 5%.
+2014-03-22 16:49:12 Iteration 29 : Error ~ 53364.979993033514
+Increase learning rate by 5%.
+2014-03-22 16:49:14 Iteration 30 : Error ~ 53136.320685564
+Increase learning rate by 5%.
+2014-03-22 16:49:17 Iteration 31 : Error ~ 52982.525321969704
+Increase learning rate by 5%.
+2014-03-22 16:49:19 Iteration 32 : Error ~ 52692.77819692352
+Increase learning rate by 5%.
+2014-03-22 16:49:21 Iteration 33 : Error ~ 52669.75125694906
+Increase learning rate by 5%.
+2014-03-22 16:49:24 Iteration 34 : Error ~ 52410.751219951446
+Increase learning rate by 5%.
+2014-03-22 16:49:26 Iteration 35 : Error ~ 52211.57971677835
+Increase learning rate by 5%.
+2014-03-22 16:49:28 Iteration 36 : Error ~ 52175.626137941115
+Increase learning rate by 5%.
+2014-03-22 16:49:31 Iteration 37 : Error ~ 52015.74285088892
+Increase learning rate by 5%.
+2014-03-22 16:49:33 Iteration 38 : Error ~ 51850.699194264394
+Increase learning rate by 5%.
+2014-03-22 16:49:35 Iteration 39 : Error ~ 51768.59349579522
+Increase learning rate by 5%.
+2014-03-22 16:49:38 Iteration 40 : Error ~ 51640.20187470796
+Increase learning rate by 5%.
+2014-03-22 16:49:40 Iteration 41 : Error ~ 51655.50610331792
+Decrease learning rate by 50%.
+2014-03-22 16:49:42 Iteration 42 : Error ~ 51481.81178286468
+Increase learning rate by 5%.
+2014-03-22 16:49:44 Iteration 43 : Error ~ 51412.60362829336
+Increase learning rate by 5%.
+2014-03-22 16:49:47 Iteration 44 : Error ~ 51347.37663641381
+Increase learning rate by 5%.
+2014-03-22 16:49:49 Iteration 45 : Error ~ 51353.47491294411
+Decrease learning rate by 50%.
+2014-03-22 16:49:52 Iteration 46 : Error ~ 51216.89444066369
+Increase learning rate by 5%.
+2014-03-22 16:49:54 Iteration 47 : Error ~ 51076.041424594485
+Increase learning rate by 5%.
+2014-03-22 16:49:56 Iteration 48 : Error ~ 51117.86264899664
+Decrease learning rate by 50%.
+2014-03-22 16:49:59 Iteration 49 : Error ~ 51124.029261604184
+Decrease learning rate by 50%.
+2014-03-22 16:50:01 Iteration 50 : Error ~ 51108.70510016187
+Increase learning rate by 5%.
+2014-03-22 16:50:03 Iteration 51 : Error ~ 51103.83639947317
+Increase learning rate by 5%.
+2014-03-22 16:50:05 Iteration 52 : Error ~ 51056.25130483684
+Increase learning rate by 5%.
+2014-03-22 16:50:08 Iteration 53 : Error ~ 51030.9023937052
+Increase learning rate by 5%.
+2014-03-22 16:50:10 Iteration 54 : Error ~ 51046.340382776885
+Decrease learning rate by 50%.
+2014-03-22 16:50:12 Iteration 55 : Error ~ 51055.82134404758
+Decrease learning rate by 50%.
+2014-03-22 16:50:15 Iteration 56 : Error ~ 51057.44360452383
+Decrease learning rate by 50%.
+2014-03-22 16:50:17 Iteration 57 : Error ~ 51051.99613860577
+Increase learning rate by 5%.
+2014-03-22 16:50:19 Iteration 58 : Error ~ 51054.67443606244
+Decrease learning rate by 50%.
+2014-03-22 16:50:21 Iteration 59 : Error ~ 51054.88271857858
+Decrease learning rate by 50%.
+2014-03-22 16:50:24 Iteration 60 : Error ~ 51053.544335604085
+Increase learning rate by 5%.
+2014-03-22 16:50:26 Iteration 61 : Error ~ 51054.68417719163
+Decrease learning rate by 50%.
+2014-03-22 16:50:28 Iteration 62 : Error ~ 51054.09091285018
+Increase learning rate by 5%.
+2014-03-22 16:50:31 Iteration 63 : Error ~ 51054.69305092987
+Decrease learning rate by 50%.
+2014-03-22 16:50:33 Iteration 64 : Error ~ 51054.38025237235
+Increase learning rate by 5%.
+2014-03-22 16:50:35 Iteration 65 : Error ~ 51054.64401515233
+Decrease learning rate by 50%.
+2014-03-22 16:50:37 Iteration 66 : Error ~ 51054.51707972638
+Increase learning rate by 5%.
+2014-03-22 16:50:40 Iteration 67 : Error ~ 51054.659150223815
+Decrease learning rate by 50%.
+2014-03-22 16:50:42 Iteration 68 : Error ~ 51054.586481945815
+Increase learning rate by 5%.
+2014-03-22 16:50:44 Iteration 69 : Error ~ 51054.656150491064
+Decrease learning rate by 50%.
+2014-03-22 16:50:47 Iteration 70 : Error ~ 51054.6210781997
+Increase learning rate by 5%.
+2014-03-22 16:50:49 Iteration 71 : Error ~ 51054.657047074055
+Decrease learning rate by 50%.
+2014-03-22 16:50:51 Iteration 72 : Error ~ 51054.63893344181
+Increase learning rate by 5%.
+2014-03-22 16:50:54 Iteration 73 : Error ~ 51054.65810596465
+Decrease learning rate by 50%.
+2014-03-22 16:50:56 Iteration 74 : Error ~ 51054.648180316275
+The algorithm convergences.
+SGD is used to train the model.
+Save the model.
+2014-03-22 16:50:56 Folder --- MAE: 0.7189871295969323 RMSE: 0.914785116582052
+Folder --- precision: 0.07826086956521769 recall: 0.01607977006445306 map: 0.06804524566984799 ndcg: 0.18494894598442746 mrr: 0.15466595970307526 auc: 0.6227969369977595
+Folder: 5
+Initialize a matrix factorization based recommendation model.
+2014-03-22 16:51:02 Iteration 0 : Error ~ 69268.16035819317
+Increase learning rate by 5%.
+2014-03-22 16:51:05 Iteration 1 : Error ~ 66189.11891167883
+Increase learning rate by 5%.
+2014-03-22 16:51:07 Iteration 2 : Error ~ 64420.617080986995
+Increase learning rate by 5%.
+2014-03-22 16:51:09 Iteration 3 : Error ~ 63305.991006911165
+Increase learning rate by 5%.
+2014-03-22 16:51:11 Iteration 4 : Error ~ 62397.5323794245
+Increase learning rate by 5%.
+2014-03-22 16:51:14 Iteration 5 : Error ~ 61746.66355106175
+Increase learning rate by 5%.
+2014-03-22 16:51:16 Iteration 6 : Error ~ 61058.681010858905
+Increase learning rate by 5%.
+2014-03-22 16:51:19 Iteration 7 : Error ~ 60553.33721464181
+Increase learning rate by 5%.
+2014-03-22 16:51:21 Iteration 8 : Error ~ 60072.54615037389
+Increase learning rate by 5%.
+2014-03-22 16:51:24 Iteration 9 : Error ~ 59696.052688569114
+Increase learning rate by 5%.
+2014-03-22 16:51:26 Iteration 10 : Error ~ 59332.18253994024
+Increase learning rate by 5%.
+2014-03-22 16:51:29 Iteration 11 : Error ~ 58922.95029181388
+Increase learning rate by 5%.
+2014-03-22 16:51:31 Iteration 12 : Error ~ 58591.33755318158
+Increase learning rate by 5%.
+2014-03-22 16:51:34 Iteration 13 : Error ~ 58206.16467346448
+Increase learning rate by 5%.
+2014-03-22 16:51:36 Iteration 14 : Error ~ 57958.94629891095
+Increase learning rate by 5%.
+2014-03-22 16:51:39 Iteration 15 : Error ~ 57571.81814960375
+Increase learning rate by 5%.
+2014-03-22 16:51:41 Iteration 16 : Error ~ 57255.799537082
+Increase learning rate by 5%.
+2014-03-22 16:51:44 Iteration 17 : Error ~ 56940.545466845
+Increase learning rate by 5%.
+2014-03-22 16:51:46 Iteration 18 : Error ~ 56692.58431994374
+Increase learning rate by 5%.
+2014-03-22 16:51:49 Iteration 19 : Error ~ 56229.83197802119
+Increase learning rate by 5%.
+2014-03-22 16:51:52 Iteration 20 : Error ~ 56001.14597152915
+Increase learning rate by 5%.
+2014-03-22 16:51:54 Iteration 21 : Error ~ 55577.330332952166
+Increase learning rate by 5%.
+2014-03-22 16:51:57 Iteration 22 : Error ~ 55210.0257894978
+Increase learning rate by 5%.
+2014-03-22 16:51:59 Iteration 23 : Error ~ 55019.81779495126
+Increase learning rate by 5%.
+2014-03-22 16:52:02 Iteration 24 : Error ~ 54591.2145488249
+Increase learning rate by 5%.
+2014-03-22 16:52:04 Iteration 25 : Error ~ 54277.355162067906
+Increase learning rate by 5%.
+2014-03-22 16:52:06 Iteration 26 : Error ~ 54042.33259790508
+Increase learning rate by 5%.
+2014-03-22 16:52:09 Iteration 27 : Error ~ 53713.54490092908
+Increase learning rate by 5%.
+2014-03-22 16:52:11 Iteration 28 : Error ~ 53552.04149944146
+Increase learning rate by 5%.
+2014-03-22 16:52:14 Iteration 29 : Error ~ 53296.80576551864
+Increase learning rate by 5%.
+2014-03-22 16:52:16 Iteration 30 : Error ~ 53115.23699575359
+Increase learning rate by 5%.
+2014-03-22 16:52:18 Iteration 31 : Error ~ 52841.92801337272
+Increase learning rate by 5%.
+2014-03-22 16:52:21 Iteration 32 : Error ~ 52616.06599450784
+Increase learning rate by 5%.
+2014-03-22 16:52:24 Iteration 33 : Error ~ 52492.749278047486
+Increase learning rate by 5%.
+2014-03-22 16:52:26 Iteration 34 : Error ~ 52251.41234394491
+Increase learning rate by 5%.
+2014-03-22 16:52:29 Iteration 35 : Error ~ 52147.910172802476
+Increase learning rate by 5%.
+2014-03-22 16:52:31 Iteration 36 : Error ~ 51922.67215040056
+Increase learning rate by 5%.
+2014-03-22 16:52:34 Iteration 37 : Error ~ 51916.30680707884
+Increase learning rate by 5%.
+2014-03-22 16:52:36 Iteration 38 : Error ~ 51574.65369422854
+Increase learning rate by 5%.
+2014-03-22 16:52:39 Iteration 39 : Error ~ 51531.690062112604
+Increase learning rate by 5%.
+2014-03-22 16:52:41 Iteration 40 : Error ~ 51513.115012936076
+Increase learning rate by 5%.
+2014-03-22 16:52:44 Iteration 41 : Error ~ 51344.30188174404
+Increase learning rate by 5%.
+2014-03-22 16:52:46 Iteration 42 : Error ~ 51325.16315091723
+Increase learning rate by 5%.
+2014-03-22 16:52:48 Iteration 43 : Error ~ 51226.71840100064
+Increase learning rate by 5%.
+2014-03-22 16:52:51 Iteration 44 : Error ~ 51273.58631677114
+Decrease learning rate by 50%.
+2014-03-22 16:52:53 Iteration 45 : Error ~ 51017.8377772721
+Increase learning rate by 5%.
+2014-03-22 16:52:55 Iteration 46 : Error ~ 50950.90041498995
+Increase learning rate by 5%.
+2014-03-22 16:52:57 Iteration 47 : Error ~ 50831.50424881181
+Increase learning rate by 5%.
+2014-03-22 16:52:59 Iteration 48 : Error ~ 50780.8951207104
+Increase learning rate by 5%.
+2014-03-22 16:53:02 Iteration 49 : Error ~ 50787.48018842066
+Decrease learning rate by 50%.
+2014-03-22 16:53:04 Iteration 50 : Error ~ 50716.105268648374
+Increase learning rate by 5%.
+2014-03-22 16:53:06 Iteration 51 : Error ~ 50642.39549077653
+Increase learning rate by 5%.
+2014-03-22 16:53:08 Iteration 52 : Error ~ 50582.902638793916
+Increase learning rate by 5%.
+2014-03-22 16:53:11 Iteration 53 : Error ~ 50577.73461587585
+Increase learning rate by 5%.
+2014-03-22 16:53:13 Iteration 54 : Error ~ 50484.945864417256
+Increase learning rate by 5%.
+2014-03-22 16:53:15 Iteration 55 : Error ~ 50565.19876727342
+Decrease learning rate by 50%.
+2014-03-22 16:53:17 Iteration 56 : Error ~ 50481.13273831801
+Increase learning rate by 5%.
+2014-03-22 16:53:19 Iteration 57 : Error ~ 50452.23590909936
+Increase learning rate by 5%.
+2014-03-22 16:53:22 Iteration 58 : Error ~ 50407.537325733916
+Increase learning rate by 5%.
+2014-03-22 16:53:24 Iteration 59 : Error ~ 50435.93439194783
+Decrease learning rate by 50%.
+2014-03-22 16:53:26 Iteration 60 : Error ~ 50408.847705556465
+Increase learning rate by 5%.
+2014-03-22 16:53:28 Iteration 61 : Error ~ 50415.336876263194
+Decrease learning rate by 50%.
+2014-03-22 16:53:30 Iteration 62 : Error ~ 50401.4218338543
+Increase learning rate by 5%.
+2014-03-22 16:53:33 Iteration 63 : Error ~ 50396.124013973735
+Increase learning rate by 5%.
+2014-03-22 16:53:35 Iteration 64 : Error ~ 50393.139582854
+Increase learning rate by 5%.
+2014-03-22 16:53:37 Iteration 65 : Error ~ 50382.868839255294
+Increase learning rate by 5%.
+2014-03-22 16:53:39 Iteration 66 : Error ~ 50333.72334225006
+Increase learning rate by 5%.
+2014-03-22 16:53:42 Iteration 67 : Error ~ 50343.97579634902
+Decrease learning rate by 50%.
+2014-03-22 16:53:44 Iteration 68 : Error ~ 50353.21972719776
+Decrease learning rate by 50%.
+2014-03-22 16:53:46 Iteration 69 : Error ~ 50354.613136846994
+Decrease learning rate by 50%.
+2014-03-22 16:53:48 Iteration 70 : Error ~ 50346.459316341294
+Increase learning rate by 5%.
+2014-03-22 16:53:50 Iteration 71 : Error ~ 50353.68037218153
+Decrease learning rate by 50%.
+2014-03-22 16:53:53 Iteration 72 : Error ~ 50348.94662711397
+Increase learning rate by 5%.
+2014-03-22 16:53:55 Iteration 73 : Error ~ 50349.91015695335
+Decrease learning rate by 50%.
+2014-03-22 16:53:57 Iteration 74 : Error ~ 50349.14470981495
+Increase learning rate by 5%.
+2014-03-22 16:53:59 Iteration 75 : Error ~ 50349.655952631125
+Decrease learning rate by 50%.
+2014-03-22 16:54:02 Iteration 76 : Error ~ 50349.29592975409
+Increase learning rate by 5%.
+2014-03-22 16:54:04 Iteration 77 : Error ~ 50349.33414956488
+Decrease learning rate by 50%.
+2014-03-22 16:54:06 Iteration 78 : Error ~ 50349.328769595675
+The algorithm convergences.
+SGD is used to train the model.
+Save the model.
+2014-03-22 16:54:06 Folder --- MAE: 0.7143482447334494 RMSE: 0.9150529763657249
+Folder --- precision: 0.07211028632025471 recall: 0.01493290295856656 map: 0.06945917285259809 ndcg: 0.17256931590735897 mrr: 0.1438847649346059 auc: 0.6137562560356981
+2014-03-22 16:54:10
+MAE: 0.7158720441730527 RMSE: 0.914311213076455
+Precision@N: 0.07567338282078495
+Recall@N: 0.015663715204016763
+MAP@N: 0.06680805938494168
+MRR@N: 0.1470060091905267
+NDCG@N: 0.17661775941696806
+AUC@N: 0.6169034700257368

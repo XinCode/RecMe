@@ -1,0 +1,7 @@
+2014-03-22 11:31:22 Read rating data...
+Number of ratings: 100000, Number of users: 943, Number of items: 1682
+5- folder cross validation.
+Folder: 1
+Initialize a user based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:31:27 Folder --- MAE: 0.7743838378570592 RMSE: 0.994947452880901

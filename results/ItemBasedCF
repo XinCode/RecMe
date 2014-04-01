@@ -1,0 +1,31 @@
+2014-03-22 11:36:27 Read rating data...
+Number of ratings: 100000, Number of users: 943, Number of items: 1682
+5- folder cross validation.
+Folder: 1
+Initialize a item based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:37:05 Folder --- MAE: 0.7251890496002826 RMSE: 0.92830972999646
+Folder: 2
+Initialize a item based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:37:46 Folder --- MAE: 0.7282012136886897 RMSE: 0.9275346553418553
+Folder: 3
+Initialize a item based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:38:50 Folder --- MAE: 0.7171242909351179 RMSE: 0.9169522720044683
+Folder: 4
+Initialize a item based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:39:41 Folder --- MAE: 0.7273346842131344 RMSE: 0.9272552146924707
+Folder: 5
+Initialize a item based collaborative filtering recommendation model.
+Save the model.
+2014-03-22 11:40:33 Folder --- MAE: 0.7225073801974372 RMSE: 0.9220316172142108
+2014-03-22 11:40:33
+MAE: 0.7240713237269325 RMSE: 0.924416697849893
+Precision@N: 0.0
+Recall@N: 0.0
+MAP@N: 0.0
+MRR@N: 0.0
+NDCG@N: 0.0
+AUC@N: 0.0
