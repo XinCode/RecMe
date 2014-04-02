@@ -2,19 +2,28 @@ RecMe is a lightweight recommendation algorithm library developed using Java 1.7
 
 The purpose of this project is to provide implementation of the state-of-the-art recommendation algorithms, mainly for self use (e.g., performance comparison with my proposed methods). Kindly send me a message if you want some recommendation algorithms to be included in the library.
 
+
 Current implementations:
 
 Baseline: GlobalAverage, UserAverage, ItemAverage, MostPopular
+
 Core: ItemCF, UserCF, PMF, SVD++, SocialReg (MF + social regularization)
+
 
 Structure of the project:
 
 (1) conf folder: configuration of each algorithm's parameters
+
 (2) data folder: input dataset (e.g., MovieLens-100k)
+
 (3) lib folder: third party libs
+
 (4) localModels folder: saved model (e.g., learned user/item's latent factors)
+
 (5) results folder: results of each algorithm + log information
+
 (6) src folder: source code
+
 
 Usage:
 
