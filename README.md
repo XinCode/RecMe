@@ -31,7 +31,7 @@ Usage:
 -----------------------------------
 Check the package "ch.epfl.lsir.xin.test" where we show how each algorithm is used to provide recommendation.
 
-The correctness of the implemented algorithms is (in part) validated by comparing with MyMediaLite (http://mymedialite.net/) using MovieLens100k dataset. Note that rating prediction accuracy of algorithms has been thoroughly tested but the ranking performance is not fully studied yet (an important follow-up task ;).
+The correctness of the implemented algorithms is (in part) validated by comparing with MyMediaLite (http://mymedialite.net/) using MovieLens100k dataset. Note that rating prediction accuracy of algorithms has been thoroughly tested but the ranking performance is not fully supported yet (an important follow-up task ;).
 
 
 GPL License:
