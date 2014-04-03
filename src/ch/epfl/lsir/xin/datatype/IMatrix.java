@@ -1,4 +1,4 @@
-//Copyright (C) 2014  Xin Liu
+//Copyright (C) 2014  Xin Liu 
 //
 //RecMe: a lightweight recommendation algorithm library
 //
@@ -17,7 +17,7 @@
 //Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /**
- *This is the interface for matrix which will be implemented by other advanced matrices
+ *This is the interface for matrix which will be implemented by other advanced matrices.
  *@author Xin Liu
  * */
 package ch.epfl.lsir.xin.datatype;
