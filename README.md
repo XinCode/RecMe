@@ -1,17 +1,19 @@
+RecMe
+==============================
 RecMe is a lightweight recommendation algorithm library developed using Java 1.7 + Eclipse.
 
 The purpose of this project is to provide implementation of the state-of-the-art recommendation algorithms, mainly for self use (e.g., performance comparison with my proposed methods). Kindly send me a message if you want some recommendation algorithms to be included in the library.
 
 
 Current implementations:
-
+------------------------------
 Baseline: GlobalAverage, UserAverage, ItemAverage, MostPopular
 
 Core: ItemCF, UserCF, PMF, SVD++, SocialReg (MF + social regularization)
 
 
 Structure of the project:
-
+-------------------------------
 (1) conf folder: configuration of each algorithm's parameters
 
 (2) data folder: input dataset (e.g., MovieLens-100k)
@@ -26,14 +28,14 @@ Structure of the project:
 
 
 Usage:
-
+-----------------------------------
 Check the package "ch.epfl.lsir.xin.test" where we show how each algorithm is used to provide recommendation.
 
 The correctness of the implemented algorithms is (in part) validated by comparing with MyMediaLite (http://mymedialite.net/) using MovieLens100k dataset. Note that rating prediction accuracy of algorithms has been thoroughly tested but the ranking performance is not fully studied yet (an important follow-up task ;).
 
 
 GPL License:
-
+----------------------------------
 Copyright (C) 2014  Xin Liu
 
 RecMe: a lightweight recommendation algorithm library
