@@ -46,7 +46,7 @@ public class LatentMatrix implements IMatrix<Double> {
 	/**
 	 * indicator for initialization of latent factor
 	 * */
-	private int initialization = -1;
+	private int initialization = 2;
 	
 	/**
 	 * constructor
