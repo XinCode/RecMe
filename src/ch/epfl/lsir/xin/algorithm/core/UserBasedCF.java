@@ -69,6 +69,9 @@ public class UserBasedCF implements IAlgorithm {
 	 * */
 	private int topN = -1;
 	
+	private int maxRating = -1;
+	private int minRating = -1;
+	
 	/**
 	 * similarity calculation method
 	 * */
@@ -91,7 +94,8 @@ public class UserBasedCF implements IAlgorithm {
 		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");		
 		this.similarityCalculation = this.config.getString("SIMILARITY");
 		this.ratingMatrix = ratingMatrix;
-		
+		this.maxRating = this.config.getInt("MAX_RATING");
+		this.minRating = this.config.getInt("MIN_RATING");
 		this.similarityMatrix = new double[this.ratingMatrix.getRow()][this.ratingMatrix.getRow()];
 	}
 	
@@ -114,13 +118,12 @@ public class UserBasedCF implements IAlgorithm {
 		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");		
 		this.similarityCalculation = this.config.getString("SIMILARITY");
 		this.ratingMatrix = ratingMatrix;
-		
+		this.maxRating = this.config.getInt("MAX_RATING");
+		this.minRating = this.config.getInt("MIN_RATING");
 		this.similarityMatrix = new double[this.ratingMatrix.getRow()][this.ratingMatrix.getRow()];
 		if( readModel )
 		{
 			readModel( file );
-		}else{
-			similarityMatrixCalculation();
 		}
 	}
 	
@@ -141,7 +144,7 @@ public class UserBasedCF implements IAlgorithm {
 					ArrayList<Double> commonRatings1 = new ArrayList<Double>();
 					ArrayList<Double> commonRatings2 = new ArrayList<Double>();
 					//find common items for the two users
-					for( int u1 = 0 ; u1 < this.ratingMatrix.getRatingMatrix().get(i).size() ; u1++ )
+					for( int u1 = 0 ; u1 < this.ratingMatrix.getColumn() ; u1++ )
 					{
 						if( this.ratingMatrix.getRatingMatrix().get(i).get(u1) != null && 
 								this.ratingMatrix.getRatingMatrix().get(j).get(u1) != null )
@@ -198,12 +201,10 @@ public class UserBasedCF implements IAlgorithm {
 				similarUsers.add(su);
 			}
 		}
-//		System.out.println("Neighbour size: " + similarUsers.size());
-		Collections.sort(similarUsers);
+
 		//collaborative filtering cannot work: first user-average and then global-average
-		if( similarUsers.size() < 1 || similarUsers.get(similarUsers.size()-1).getSimilarity() == 0 )
+		if( similarUsers.size() < 1 )
 		{
-//			System.out.println("Cannot be predicted by UserCF");
 			double userM = this.ratingMatrix.getUsersMean().get(userIndex); 
 			if( !Double.isNaN(userM) )
 			{
@@ -212,6 +213,7 @@ public class UserBasedCF implements IAlgorithm {
 				return this.ratingMatrix.getAverageRating();
 			}
 		}
+		Collections.sort(similarUsers);
 		
 		double totalSimilarity = 0;
 		double prediction = 0;
@@ -221,33 +223,23 @@ public class UserBasedCF implements IAlgorithm {
 			totalSimilarity = totalSimilarity + Math.abs(similarUsers.get(i).getSimilarity());
 			prediction = prediction + similarUsers.get(i).getSimilarity() * (similarUsers.get(i).getRating() 
 					- this.ratingMatrix.getUsersMean().get(similarUsers.get(i).getUserIndex())); 
-			if(  Double.isNaN(totalSimilarity) || totalSimilarity == 0  )
-			{
-				System.out.println(similarUsers.get(i).getSimilarity() + " ,  "
-						+ similarUsers.get(i).getRating() + " pred: " + prediction);
-			}
 			counter++;
 			if( counter == neighbors )
 				break;
 		}
 		if( Double.isNaN(totalSimilarity) || totalSimilarity == 0 )
 		{
-			System.out.println("Total similarity is NaN.");
-			return Double.NaN;
+			double userM = this.ratingMatrix.getUsersMean().get(userIndex); 
+			if( !Double.isNaN(userM) )
+			{
+				return userM;
+			}else{
+				return this.ratingMatrix.getAverageRating();
+			}
 		}
 		prediction = prediction / totalSimilarity;	
 		prediction = prediction + this.ratingMatrix.getUsersMean().get(userIndex);
-		int max =  this.config.getInt("MAX_RATING");
-		if( prediction > max )
-		{
-			prediction = max;
-		}
-		int min = this.config.getInt("MIN_RATING");
-		if( prediction < min )
-		{
-			prediction = min;
-		}
-		
+
 		return prediction;
 	}
 	
@@ -303,24 +295,6 @@ public class UserBasedCF implements IAlgorithm {
 		// TODO Auto-generated method stub
 		
 		similarityMatrixCalculation();
-		
-		//display similarity matrix
-//		try {
-//			PrintWriter printer = new PrintWriter("matrix");
-//			for( int i = 0 ; i < this.similarityMatrix.length ; i++ )
-//			{
-//				for( int j = 0 ; j < this.similarityMatrix[i].length ; j++ )
-//				{
-//					printer.print(this.similarityMatrix[i][j] + "  ");
-//				}
-//				printer.println();
-//			}
-//			printer.flush();
-//			printer.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
 	}
 	
 	/**
@@ -336,8 +310,8 @@ public class UserBasedCF implements IAlgorithm {
 			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
 			{
 				//this item has not been rated by the user
-				ResultUnit unit = new ResultUnit( userIndex , i , /*predict(userIndex , i)*/
-						getPredictionRanking(userIndex , i) );
+				ResultUnit unit = new ResultUnit( userIndex , i , predict(userIndex , i)
+						/*getPredictionRanking(userIndex , i) */);
 				recommendationList.add(unit);
 			}
 		}
@@ -349,11 +323,11 @@ public class UserBasedCF implements IAlgorithm {
 		{
 			result.add(recommendationList.get(i));
 			top++;			
-			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
+//			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
 			if( top == this.topN )
 				break;
 		}
-		System.out.println();
+//		System.out.println();
 		return result;
 	}
 	
@@ -465,5 +439,34 @@ public class UserBasedCF implements IAlgorithm {
 	public void setSimilarityCalculation(String similarityCalculation) {
 		this.similarityCalculation = similarityCalculation;
 	}
+
+	/**
+	 * @return the maxRating
+	 */
+	public int getMaxRating() {
+		return maxRating;
+	}
+
+	/**
+	 * @param maxRating the maxRating to set
+	 */
+	public void setMaxRating(int maxRating) {
+		this.maxRating = maxRating;
+	}
+
+	/**
+	 * @return the minRating
+	 */
+	public int getMinRating() {
+		return minRating;
+	}
+
+	/**
+	 * @param minRating the minRating to set
+	 */
+	public void setMinRating(int minRating) {
+		this.minRating = minRating;
+	}
+	
 	
 }

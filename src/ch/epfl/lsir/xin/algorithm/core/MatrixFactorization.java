@@ -425,11 +425,21 @@ public class MatrixFactorization implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
+		//how many test ratings of this user?
+//		int n = 0;
+//		for( int i = 0 ; i < this.ratingMatrix.getRatingMatrix().get(userIndex).size() ; i++ )
+//		{
+//			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
+//				n++;
+//		}
+//		if( n < this.topN * 3 )
+//			return null;
+		
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
 		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
 		{
-			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) != null )
+			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
 			{
 				//this item has not been rated by the item
 				ResultUnit unit = new ResultUnit( userIndex , i , predict( userIndex , i) );
@@ -442,10 +452,10 @@ public class MatrixFactorization implements IAlgorithm {
 		ArrayList<ResultUnit> result = new ArrayList<ResultUnit>();
 		for( int i = recommendationList.size() - 1 ; i >= recommendationList.size() - this.topN ; i-- )
 		{
-			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
+//			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
 			result.add(recommendationList.get(i));
 		}
-		System.out.println();
+//		System.out.println();
 		return result;
 	}
 	

@@ -161,12 +161,16 @@ public class UserBasedCFTest {
 				NumericRating rating = testRatings.get(i);
 				double prediction = algo.predict(userIDIndexMapping.get(rating.getUserID()), 
 						itemIDIndexMapping.get(rating.getItemID()));
-				
+
 				if( Double.isNaN(prediction) )
 				{
 					System.out.println("no prediction");
 					continue;
 				}
+				if( prediction > algo.getMaxRating() )
+					prediction = algo.getMaxRating();
+				if( prediction < algo.getMinRating() )
+					prediction = algo.getMinRating();
 				MAE = MAE + Math.abs(rating.getValue() - prediction);
 				RMSE = RMSE + Math.pow((rating.getValue() - prediction) , 2);
 				count++;

@@ -80,7 +80,7 @@ public class RankResultGenerator {
 		for( Map.Entry<Integer, ArrayList<ResultUnit>> entry : this.results.entrySet() )
 		{
 			int userIndex = entry.getKey();
-			ArrayList<ResultUnit> res = entry.getValue();
+			ArrayList<ResultUnit> res = entry.getValue();//recommended items
 			int hit = 0;
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
@@ -318,14 +318,16 @@ public class RankResultGenerator {
 				{
 					hit++;
 				}else
-				{
-					correct_pairs = correct_pairs + hit;
+				{	
+					//correct pairs for (hit item vs. items after this hit item in the rec list)
+					correct_pairs = correct_pairs + hit;		
 					nHit++;
 				}
+				
 			}
 			relevantUnder = this.testRatingMatrix.getUserRatingNumber(userIndex) - hit;
 			all_pairs = (nHit + relevantUnder) * hit;//negative * positive
-			correct_pairs = correct_pairs + hit * (relevantUnder);
+			correct_pairs = correct_pairs + hit * relevantUnder;
 			if( all_pairs == 0 )
 			{
 				auc = auc + 0.5;

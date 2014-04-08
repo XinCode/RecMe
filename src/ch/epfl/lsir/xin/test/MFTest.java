@@ -194,6 +194,8 @@ public class MFTest {
 				for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
 				{
 					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
+					if( rec == null )
+						continue;
 					results.put(i, rec);
 				}
 				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
@@ -239,9 +241,6 @@ public class MFTest {
 				"AUC@N: " + totalAUC/F );
 		logger.flush();
 		logger.close();
-		//MAE: 0.7381923761294539 RMSE: 0.9344309024005261(MovieLens 100K)
-		/*LEARNING_RATE = 0.0005;REGULARIZATION_USER = 0.1;REGULARIZATION_ITEM = 0.1;
-		 * LATENT_FACTORS = 5;ITERATIONS = 200*/
 		
 	}
 

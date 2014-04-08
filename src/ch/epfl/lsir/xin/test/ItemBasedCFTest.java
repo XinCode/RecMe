@@ -160,6 +160,11 @@ public class ItemBasedCFTest {
 				NumericRating rating = testRatings.get(i);
 				double prediction = algo.predict(userIDIndexMapping.get(rating.getUserID()), 
 						itemIDIndexMapping.get(rating.getItemID()));
+				if( prediction > algo.getMaxRating() )
+					prediction = algo.getMaxRating();
+				if( prediction < algo.getMinRating() )
+					prediction = algo.getMinRating();
+				
 				if( Double.isNaN(prediction) )
 				{
 					System.out.println("no prediction");
@@ -178,33 +183,33 @@ public class ItemBasedCFTest {
 					" Folder --- MAE: " + MAE + " RMSE: " + RMSE);
 			
 			//ranking accuracy
-//			if( algo.getTopN() > 0 )
-//			{
-//				HashMap<Integer , ArrayList<ResultUnit>> results = new HashMap<Integer , ArrayList<ResultUnit>>();
-//				for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
-//				{
-//					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
-//					results.put(i, rec);
-//				}
-//				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
-//				precision = generator.getPrecisionN();
-//				totalPrecision = totalPrecision + precision;
-//				recall = generator.getRecallN();
-//				totalRecall = totalRecall + recall;
-//				map = generator.getMAPN();
-//				totalMAP = totalMAP + map;
-//				ndcg = generator.getNDCGN();
-//				totalNDCG = totalNDCG + ndcg;
-//				mrr = generator.getMRRN();
-//				totalMRR = totalMRR + mrr;
-//				auc = generator.getAUC();
-//				totalAUC = totalAUC + auc;
-//				System.out.println("Folder --- precision: " + precision + " recall: " + 
-//				recall + " map: " + map + " ndcg: " + ndcg + " mrr: " + mrr + " auc: " + auc);
-//				logger.append("Folder --- precision: " + precision + " recall: " + 
-//						recall + " map: " + map + " ndcg: " + ndcg + " mrr: " + 
-//						mrr + " auc: " + auc + "\n");
-//			}
+			if( algo.getTopN() > 0 )
+			{
+				HashMap<Integer , ArrayList<ResultUnit>> results = new HashMap<Integer , ArrayList<ResultUnit>>();
+				for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
+				{
+					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
+					results.put(i, rec);
+				}
+				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
+				precision = generator.getPrecisionN();
+				totalPrecision = totalPrecision + precision;
+				recall = generator.getRecallN();
+				totalRecall = totalRecall + recall;
+				map = generator.getMAPN();
+				totalMAP = totalMAP + map;
+				ndcg = generator.getNDCGN();
+				totalNDCG = totalNDCG + ndcg;
+				mrr = generator.getMRRN();
+				totalMRR = totalMRR + mrr;
+				auc = generator.getAUC();
+				totalAUC = totalAUC + auc;
+				System.out.println("Folder --- precision: " + precision + " recall: " + 
+				recall + " map: " + map + " ndcg: " + ndcg + " mrr: " + mrr + " auc: " + auc);
+				logger.append("Folder --- precision: " + precision + " recall: " + 
+						recall + " map: " + map + " ndcg: " + ndcg + " mrr: " + 
+						mrr + " auc: " + auc + "\n");
+			}
 		}
 		
 		System.out.println("MAE: " + totalMAE/F + " RMSE: " + totalRMSE/F);

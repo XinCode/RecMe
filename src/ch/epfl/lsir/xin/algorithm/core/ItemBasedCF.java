@@ -38,6 +38,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 
 import ch.epfl.lsir.xin.algorithm.IAlgorithm;
 import ch.epfl.lsir.xin.datatype.RatingMatrix;
+import ch.epfl.lsir.xin.evaluation.ResultUnit;
 import ch.epfl.lsir.xin.model.SItem;
 import ch.epfl.lsir.xin.util.SimilarityCalculator;
 
@@ -68,6 +69,9 @@ public class ItemBasedCF implements IAlgorithm {
 	 * */
 	private int topN = -1;
 	
+	private int maxRating = -1;
+	private int minRating = -1;
+	
 	/**
 	 * similarity calculation method
 	 * */
@@ -92,7 +96,8 @@ public class ItemBasedCF implements IAlgorithm {
 		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");		
 		this.similarityCalculation = this.config.getString("SIMILARITY");
 		this.ratingMatrix = ratingMatrix;
-		
+		this.maxRating = this.config.getInt("MAX_RATING");
+		this.minRating = this.config.getInt("MIN_RATING");
 		this.similarityMatrix = new double[this.ratingMatrix.getColumn()][this.ratingMatrix.getColumn()];
 		similarityMatrixCalculation();
 		
@@ -133,7 +138,8 @@ public class ItemBasedCF implements IAlgorithm {
 		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");		
 		this.similarityCalculation = this.config.getString("SIMILARITY");
 		this.ratingMatrix = ratingMatrix;
-		
+		this.maxRating = this.config.getInt("MAX_RATING");
+		this.minRating = this.config.getInt("MIN_RATING");
 		this.similarityMatrix = new double[this.ratingMatrix.getColumn()][this.ratingMatrix.getColumn()];
 		
 		if( readModel )
@@ -310,20 +316,43 @@ public class ItemBasedCF implements IAlgorithm {
 		}
 		prediction = prediction / totalSimilarity;	
 		prediction = prediction + this.ratingMatrix.getItemsMean().get(itemIndex);
-		int max =  this.config.getInt("MAX_RATING");
-		if( prediction > max )
-		{
-			prediction = max;
-		}
-		int min = this.config.getInt("MIN_RATING");
-		if( prediction < min )
-		{
-			prediction = min;
-		}
 		
 		return prediction;
 	}
 	
+	/**
+	 * This function generates a recommendation list for a given user
+	 * @param: user
+	 * */
+//	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
+//	{
+//		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
+//		//find all item candidate list (items that are not rated by the user)
+//		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
+//		{
+//			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
+//			{
+//				//this item has not been rated by the user
+//				ResultUnit unit = new ResultUnit( userIndex , i , /*predict(userIndex , i)*/
+//						getPredictionRanking(userIndex , i) );
+//				recommendationList.add(unit);
+//			}
+//		}
+//		//sort the recommendation list
+//		Collections.sort(recommendationList);
+//		ArrayList<ResultUnit> result = new ArrayList<ResultUnit>();
+//		int top = 0;
+//		for( int i = recommendationList.size() - 1 ; i >= 0 ; i-- )
+//		{
+//			result.add(recommendationList.get(i));
+//			top++;			
+////			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
+//			if( top == this.topN )
+//				break;
+//		}
+////		System.out.println();
+//		return result;
+//	}
 	
 	/**
 	 * @return the ratingMatrix
@@ -393,6 +422,35 @@ public class ItemBasedCF implements IAlgorithm {
 	 */
 	public void setLogger(PrintWriter logger) {
 		this.logger = logger;
+	}
+
+	/**
+	 * @return the maxRating
+	 */
+	public int getMaxRating() {
+		return maxRating;
+	}
+
+	/**
+	 * @param maxRating the maxRating to set
+	 */
+	public void setMaxRating(int maxRating) {
+		this.maxRating = maxRating;
+	}
+
+	/**
+	 * @return the minRating
+	 */
+	public int getMinRating() {
+		return minRating;
+	}
+
+	/**
+	 * @param minRating the minRating to set
+	 */
+	public void setMinRating(int minRating) {
+		this.minRating = minRating;
 	}	
 
+	
 }
