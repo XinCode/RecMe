@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -144,13 +145,13 @@ public class UserBasedCF implements IAlgorithm {
 					ArrayList<Double> commonRatings1 = new ArrayList<Double>();
 					ArrayList<Double> commonRatings2 = new ArrayList<Double>();
 					//find common items for the two users
-					for( int u1 = 0 ; u1 < this.ratingMatrix.getColumn() ; u1++ )
+					for( Map.Entry<Integer, Double> entry : this.ratingMatrix.getRatingMatrix().get(i).entrySet() )
 					{
-						if( this.ratingMatrix.getRatingMatrix().get(i).get(u1) != null && 
-								this.ratingMatrix.getRatingMatrix().get(j).get(u1) != null )
+						int itemI = entry.getKey();
+						if( entry.getValue() != null && this.ratingMatrix.getRatingMatrix().get(j).get(itemI) != null)
 						{
-							commonRatings1.add(this.ratingMatrix.getRatingMatrix().get(i).get(u1));
-							commonRatings2.add(this.ratingMatrix.getRatingMatrix().get(j).get(u1));
+							commonRatings1.add(this.ratingMatrix.getRatingMatrix().get(i).get(itemI));
+							commonRatings2.add(this.ratingMatrix.getRatingMatrix().get(j).get(itemI));
 						}
 					}
 					
@@ -183,9 +184,10 @@ public class UserBasedCF implements IAlgorithm {
 	 * This function predicts a user's rating to an item
 	 * @param: index of the user
 	 * @param: index of the item
+	 * @param: is the predicted rating for rating prediction or ranking?
 	 * @return: the predicted rating
 	 * */
-	public double predict( int userIndex , int itemIndex )
+	public double predict( int userIndex , int itemIndex , boolean rank )
 	{
 		ArrayList<SUser> similarUsers = new ArrayList<SUser>();
 		int neighbors = this.config.getInt("NEIGHBOUR_SIZE");
@@ -237,9 +239,13 @@ public class UserBasedCF implements IAlgorithm {
 				return this.ratingMatrix.getAverageRating();
 			}
 		}
-		prediction = prediction / totalSimilarity;	
-		prediction = prediction + this.ratingMatrix.getUsersMean().get(userIndex);
-
+		if( rank )
+		{
+//			prediction = prediction / totalSimilarity;	
+		}else{
+			prediction = prediction / totalSimilarity;	
+			prediction = prediction + this.ratingMatrix.getUsersMean().get(userIndex);
+		}
 		return prediction;
 	}
 	
@@ -303,6 +309,9 @@ public class UserBasedCF implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
+		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
+			return null;
+		
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
 		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
@@ -310,11 +319,13 @@ public class UserBasedCF implements IAlgorithm {
 			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
 			{
 				//this item has not been rated by the user
-				ResultUnit unit = new ResultUnit( userIndex , i , predict(userIndex , i)
+				double prediction = predict(userIndex , i , true);
+				ResultUnit unit = new ResultUnit( userIndex , i , prediction
 						/*getPredictionRanking(userIndex , i) */);
 				recommendationList.add(unit);
 			}
 		}
+		
 		//sort the recommendation list
 		Collections.sort(recommendationList);
 		ArrayList<ResultUnit> result = new ArrayList<ResultUnit>();

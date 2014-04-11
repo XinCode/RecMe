@@ -336,6 +336,10 @@ public class SVDPlusPlus implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
+		//how many train/test ratings of this user are sufficient?
+		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
+			return null;
+				
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
 		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
@@ -343,7 +347,7 @@ public class SVDPlusPlus implements IAlgorithm {
 			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
 			{
 				//this item has not been rated by the item
-				ResultUnit unit = new ResultUnit( userIndex , i , predict( userIndex , i) );
+				ResultUnit unit = new ResultUnit( userIndex , i , predict( userIndex , i , true) );
 				recommendationList.add(unit);
 			}
 		}
@@ -388,13 +392,12 @@ public class SVDPlusPlus implements IAlgorithm {
 			System.out.println("Iteration: " + i);
 			ArrayList<MatrixEntry2D> entries = this.ratingMatrix.getValidEntries();
 			double error = 0; //overall error of this iteration
-			System.out.println("Ratings: " + entries.size());
 			while( entries.size() > 0 )
 			{
 				//find a random entry
 				int r = new Random().nextInt(entries.size());
 				MatrixEntry2D entry = entries.get(r);
-				double prediction = predict( entry.getRowIndex() , entry.getColumnIndex() );
+				double prediction = predict( entry.getRowIndex() , entry.getColumnIndex() , false );
 				if( prediction > this.maxRating )
 					prediction = this.maxRating;
 				if( prediction < this.minRating )
@@ -453,7 +456,7 @@ public class SVDPlusPlus implements IAlgorithm {
 			for( int k = 0 ; k < entries.size() ; k++ )
 			{
 				MatrixEntry2D entry = entries.get(k);
-				double prediction = predict( entry.getRowIndex() , entry.getColumnIndex() );
+				double prediction = predict( entry.getRowIndex() , entry.getColumnIndex() , false);
 				if( prediction > this.maxRating )
 					prediction = this.maxRating;
 				if( prediction < this.minRating )
@@ -529,14 +532,18 @@ public class SVDPlusPlus implements IAlgorithm {
 	 * @param: index of the user
 	 * @param: index of the item
 	 * */
-	public double predict( int user , int item )
+	public double predict( int user , int item , boolean rank )
 	{
-		double prediction = this.globalAverage + this.userBias[user] + this.itemBias[item];
+		double prediction = 0;
 		for( int i = 0 ; i < this.latentFactors ; i++ )
 		{
 			prediction = prediction + this.userMatrix.getValues()[user][i] * 
 					this.itemMatrix.getValues()[item][i];
 		}
+//		//possible special process for recommendation ranking
+//		if( rank )
+//			return prediction;
+		prediction += this.globalAverage + this.userBias[user] + this.itemBias[item];
 		ArrayList<Integer> ratedItems = this.ratingMatrix.getRatedItems().get(user);
 		//number of items rated by this user
 		double constant = Math.sqrt(ratedItems.size());

@@ -117,6 +117,8 @@ public class MostPopular implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
+		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
+			return null;
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
 		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )

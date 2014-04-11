@@ -29,7 +29,7 @@ import java.util.Random;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import ch.epfl.lsir.xin.algorithm.core.SVDPlusPlus;
+import ch.epfl.lsir.xin.algorithm.core.BiasedMF;
 import ch.epfl.lsir.xin.datatype.RatingMatrix;
 import ch.epfl.lsir.xin.evaluation.RankResultGenerator;
 import ch.epfl.lsir.xin.evaluation.ResultUnit;
@@ -37,7 +37,7 @@ import ch.epfl.lsir.xin.io.DataLoaderFile;
 import ch.epfl.lsir.xin.model.DataSetNumeric;
 import ch.epfl.lsir.xin.model.NumericRating;
 
-public class SVDPPTest {
+public class BiasedMFTest {
 
 	/**
 	 * @param args
@@ -45,10 +45,10 @@ public class SVDPPTest {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
-		PrintWriter logger = new PrintWriter(".//results//SVDPP");
+		PrintWriter logger = new PrintWriter(".//results//BiasedMF");
 		
 		PropertiesConfiguration config = new PropertiesConfiguration();
-		config.setFile(new File("conf//SVDPlusPlus.properties"));
+		config.setFile(new File("conf//biasedMF.properties"));
 		try {
 			config.load();
 		} catch (ConfigurationException e) {
@@ -140,16 +140,16 @@ public class SVDPPTest {
 			System.out.println("Training: " + trainRatingMatrix.getTotalRatingNumber() + " vs Test: "
 					+ testRatingMatrix.getTotalRatingNumber() );
 			
-			logger.println("Initialize a SVD++ recommendation model.");
+			logger.println("Initialize a biased matrix factorization recommendation model.");
 			logger.flush();
-			SVDPlusPlus algo = new SVDPlusPlus( trainRatingMatrix , false 
-					, ".//localModels//" + config.getString("NAME") );
+			BiasedMF algo = new BiasedMF(trainRatingMatrix , false 
+					, ".//localModels//" + config.getString("NAME"));
 			algo.setLogger(logger);
 			algo.build();
 			algo.saveModel(".//localModels//" + config.getString("NAME"));
 			logger.println("Save the model.");
 			logger.flush();
-						
+			
 			//rating prediction accuracy
 			double RMSE = 0;
 			double MAE = 0;
@@ -241,5 +241,13 @@ public class SVDPPTest {
 		logger.flush();
 		logger.close();
 	}
-
+	/**
+	 * MAE: 0.7142910025078407 RMSE: 0.9131165812277005
+		Precision@N: 0.03945662605549598
+		Recall@N: 0.07271205032732438
+		MAP@N: 0.04497422335801708
+		MRR@N: 0.11164936514384716
+		NDCG@N: 0.14898611996033084
+		AUC@N: 0.565306712113494
+	 * */
 }

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -131,11 +132,11 @@ public class UserBasedCFTest {
 					dataset.getItemIDs().size() );
 			for( int i = 0 ; i < testRatings.size() ; i++ )
 			{
+				if( testRatings.get(i).getValue() < 5 )
+					continue;
 				testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 						itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 			}
-			System.out.println("Training: " + trainRatingMatrix.getTotalRatingNumber() + " vs Test: "
-					+ testRatingMatrix.getTotalRatingNumber() );
 			logger.println("Initialize a user based collaborative filtering recommendation model.");
 			UserBasedCF algo = new UserBasedCF( trainRatingMatrix , false , 
 					".//localModels//" + config.getString("NAME"));
@@ -160,7 +161,7 @@ public class UserBasedCFTest {
 			{
 				NumericRating rating = testRatings.get(i);
 				double prediction = algo.predict(userIDIndexMapping.get(rating.getUserID()), 
-						itemIDIndexMapping.get(rating.getItemID()));
+						itemIDIndexMapping.get(rating.getItemID()) , false);
 
 				if( Double.isNaN(prediction) )
 				{
@@ -187,10 +188,26 @@ public class UserBasedCFTest {
 			if( algo.getTopN() > 0 )
 			{
 				HashMap<Integer , ArrayList<ResultUnit>> results = new HashMap<Integer , ArrayList<ResultUnit>>();
-				for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
+				for( int i = 0 ; i < testRatingMatrix.getRow() ; i++ )
 				{
 					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
+					if( rec == null )
+						continue;
+					int total = testRatingMatrix.getUserRatingNumber(i);
+					if( total == 0 )//this user is ignored
+						continue;
 					results.put(i, rec);
+//					for( Map.Entry<Integer, Double> entry : testRatingMatrix.getRatingMatrix().get(i).entrySet() )
+//					{
+//						System.out.print( entry.getKey() + "(" + entry.getValue() + ") , ");
+//					}
+//					System.out.println();
+//					for( int j = 0 ; j < rec.size() ; j++ )
+//					{
+//						System.out.print(rec.get(j).getItemIndex() + "(" + rec.get(j).getPrediciton() +
+//								") , ");
+//					}
+//					System.out.println("**********");
 				}
 				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
 				precision = generator.getPrecisionN();
@@ -220,9 +237,17 @@ public class UserBasedCFTest {
 		System.out.println("MRR@N: " + totalMRR/F);
 		System.out.println("NDCG@N: " + totalNDCG/F);
 		System.out.println("AUC@N: " + totalAUC/F);
+		// MovieLens100k
 		//MAE: 0.7343907480119425 RMSE: 0.9405808357192891 (MovieLens 100K, shrinkage 25, neighbor size 60, PCC)
 		//MAE: 0.7522376630596646 RMSE: 0.9520931265724659 (MovieLens 100K, no shrinkage , neighbor size 40, COSINE)
-		
+		/**
+		 * Precision@N: 0.09775251511582342
+			Recall@N: 0.19148039452057336
+			MAP@N: 0.1426564541136997
+			MRR@N: 0.30048667156091896
+			NDCG@N: 0.3470226035028776
+			AUC@N: 0.6447526748573156
+		 * */
 		logger.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\n" + 
 				"MAE: " + totalMAE/F + " RMSE: " + totalRMSE/F + "\n" + 
 				"Precision@N: " + totalPrecision/F + "\n" + 

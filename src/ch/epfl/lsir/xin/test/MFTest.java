@@ -20,12 +20,12 @@
 package ch.epfl.lsir.xin.test;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -134,6 +134,8 @@ public class MFTest {
 					dataset.getItemIDs().size() );
 			for( int i = 0 ; i < testRatings.size() ; i++ )
 			{
+				if( testRatings.get(i).getValue() < 5 )
+					continue;
 				testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 						itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 			}
@@ -149,9 +151,7 @@ public class MFTest {
 			algo.saveModel(".//localModels//" + config.getString("NAME"));
 			logger.println("Save the model.");
 			logger.flush();
-			
-			System.out.println(trainRatings.size() + " vs. " + testRatings.size());
-			
+						
 			//rating prediction accuracy
 			double RMSE = 0;
 			double MAE = 0;
@@ -166,7 +166,7 @@ public class MFTest {
 			{
 				NumericRating rating = testRatings.get(i);
 				double prediction = algo.predict(userIDIndexMapping.get(rating.getUserID()), 
-						itemIDIndexMapping.get(rating.getItemID()));
+						itemIDIndexMapping.get(rating.getItemID()) , false);
 				if( prediction > algo.getMaxRating() )
 					prediction = algo.getMaxRating();
 				if( prediction < algo.getMinRating() )
@@ -196,7 +196,21 @@ public class MFTest {
 					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
 					if( rec == null )
 						continue;
+					int total = testRatingMatrix.getUserRatingNumber(i);
+					if( total == 0 )//this user is ignored
+						continue;
 					results.put(i, rec);
+//					for( Map.Entry<Integer, Double> entry : testRatingMatrix.getRatingMatrix().get(i).entrySet() )
+//					{
+//						System.out.print( entry.getKey() + "(" + entry.getValue() + ") , ");
+//					}
+//					System.out.println();
+//					for( int j = 0 ; j < rec.size() ; j++ )
+//					{
+//						System.out.print(rec.get(j).getItemIndex() + "(" + rec.get(j).getPrediciton() +
+//								") , ");
+//					}
+//					System.out.println("**********");
 				}
 				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
 				precision = generator.getPrecisionN();

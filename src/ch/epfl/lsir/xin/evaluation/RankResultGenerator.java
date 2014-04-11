@@ -84,13 +84,9 @@ public class RankResultGenerator {
 			int hit = 0;
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						hit++;
-						break;
-					}
+					hit++;
 				}
 			}
 			precision = precision + (double)hit/this.TopN;
@@ -124,13 +120,9 @@ public class RankResultGenerator {
 
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						hit++;
-						break;
-					}
+					hit++;
 				}
 			}
 			recall = recall + (double)hit/total;
@@ -161,13 +153,9 @@ public class RankResultGenerator {
 			double ap = 0;
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						hit++;
-						break;
-					}
+					hit++;
 				}
 				ap = ap + hit/(i+1);
 			}
@@ -201,13 +189,9 @@ public class RankResultGenerator {
 			int first = 0;
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						first = i + 1;
-						break;
-					}
+					first = i + 1;
 				}
 				
 				if( first > 0 )
@@ -244,14 +228,10 @@ public class RankResultGenerator {
 			int c = 0;
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						dcg = dcg +  Math.log(2) / Math.log(i + 2);
-						c++;
-						break;
-					}
+					dcg = dcg +  Math.log(2) / Math.log(i + 2);
+					c++;
 				}
 				
 			}
@@ -306,13 +286,9 @@ public class RankResultGenerator {
 			for( int i = 0 ; i < res.size() ; i++ )
 			{
 				boolean h = false;//does this recommendation hit??
-				for( int j = 0 ; j < this.testRatingMatrix.getRatingMatrix().get(userIndex).size() ; j++ )
+				if( this.testRatingMatrix.getRatingMatrix().get(userIndex).keySet().contains(res.get(i).getItemIndex()) )
 				{
-					if( this.testRatingMatrix.getRatingMatrix().get(userIndex).get(res.get(i).getItemIndex()) != null )
-					{
-						h = true;
-						break;
-					}
+					h = true;
 				}
 				if( h )
 				{
@@ -332,7 +308,7 @@ public class RankResultGenerator {
 			{
 				auc = auc + 0.5;
 			}else{
-				double u_auc = (double)correct_pairs/all_pairs;
+				double u_auc = (double)correct_pairs/all_pairs; 
 				auc = auc + u_auc;
 			}			
 			count++;

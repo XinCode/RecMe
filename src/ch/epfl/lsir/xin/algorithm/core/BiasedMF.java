@@ -17,9 +17,8 @@
 //Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /**
- * This class implements the basic matrix factorization model for recommendation
- * 
- * Ruslan Salakhutdinov and Andriy Mnih, Probabilistic Matrix Factorization, NIPS 2008.
+ * This class implements the biased matrix factorization see:
+ * Section 'adding Biases' of paper "MATRIX FACTORIZATION TECHNIQUES FOR RECOMMENDER SYSTEMS"
  * 
  * @author Xin Liu
  * */
@@ -41,14 +40,13 @@ import java.util.StringTokenizer;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import Jama.Matrix;
 import ch.epfl.lsir.xin.algorithm.IAlgorithm;
 import ch.epfl.lsir.xin.datatype.LatentMatrix;
 import ch.epfl.lsir.xin.datatype.MatrixEntry2D;
 import ch.epfl.lsir.xin.datatype.RatingMatrix;
 import ch.epfl.lsir.xin.evaluation.ResultUnit;
 
-public class MatrixFactorization implements IAlgorithm {
+public class BiasedMF implements IAlgorithm {
 
 	/**
 	 * the rating matrix
@@ -85,50 +83,72 @@ public class MatrixFactorization implements IAlgorithm {
 	private int initialization = -1;
 	
 	/**
+	 * user bias
+	 * */
+	private double[] userBias = null;
+	
+	/**
+	 * item bias
+	 * */
+	private double[] itemBias = null;
+	
+	/**
 	 * SGD parameters
 	 * */
 	private int latentFactors = -1;
-	private int Iterations = -1;
+	private int iterations = -1;
 	private double learningRate = -1;
-	private double regUser = -1;
-	private double regItem = -1;
+	private double biasLearningRate = -1;
+	private double userReg = -1;
+	private double itemReg = -1;
+	private double biasUserReg = -1;
+	private double biasItemReg = -1;
 	private double convergence = -1;
 	
-	/**
-	 * optimization method indicator
-	 * */
-	private String optimization = null;
+	private double globalAverage = -1;
 	
 	private int topN = -1;
+	
+	private String optimization = null;
 	
 	private int maxRating = -1;
 	private int minRating = -1;
 	
+	
+	
 	/**
 	 * constructor
-	 * @param: rating matrix
-	 * @param: indicator for loading an existing model
-	 * @param: location of the file that stores the model
 	 * */
-	public MatrixFactorization( RatingMatrix ratingMatrix , boolean readModel , String modelFile )
+	public BiasedMF( RatingMatrix ratingMatrix , boolean readModel , String modelFile )
 	{
 		//set configuration file for parameter setting.
-		config.setFile(new File(".//conf//MF.properties"));
+		config.setFile(new File(".//conf//biasedMF.properties"));
 		try {
 			config.load();
 		} catch (ConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		this.ratingMatrix = ratingMatrix;
 		this.initialization = this.config.getInt("INITIALIZATION");
-		this.latentFactors = this.config.getInt("LATENT_FACTORS");
-		this.Iterations = this.config.getInt("ITERATIONS");
-		this.learningRate = this.config.getDouble("LEARNING_RATE");
-		this.regUser = this.config.getDouble("REGULARIZATION_USER");
-		this.regItem = this.config.getDouble("REGULARIZATION_ITEM");
+		this.iterations = this.config.getInt("ITERATIONS");
 		this.convergence = this.config.getDouble("CONVERGENCE");
 		this.optimization = this.config.getString("OPTIMIZATION_METHOD");
+		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");
+		this.ratingMatrix.calculateGlobalAverage();
+		this.globalAverage = this.ratingMatrix.getAverageRating();
+		this.maxRating = this.config.getInt("MAX_RATING");
+		this.minRating = this.config.getInt("MIN_RATING");
+		
+		this.latentFactors = this.config.getInt("LATENT_FACTORS");
+		this.userReg = this.config.getDouble("REGULARIZATION_USER");
+		this.itemReg = this.config.getDouble("REGULARIZATION_ITEM");
+		this.biasUserReg = this.config.getDouble("BIAS_REGULARIZATION_USER");
+		this.biasItemReg = this.config.getDouble("BIAS_REGULARIZATION_ITEM");
+		this.learningRate = this.config.getDouble("LEARNING_RATE");
+		this.biasLearningRate = this.config.getDouble("BIAS_LEARNING_RATE");
+		
 		this.userMatrix = new LatentMatrix( this.ratingMatrix.getRow() , this.latentFactors);
 		this.userMatrix.setInitialization(this.initialization); 
 		this.userMatrix.valueInitialization();
@@ -137,9 +157,9 @@ public class MatrixFactorization implements IAlgorithm {
 		this.itemMatrix.setInitialization(this.initialization);
 		this.itemMatrix.valueInitialization();
 		this.itemMatrixPrevious = this.itemMatrix.clone();
-		this.topN = this.config.getInt("TOP_N_RECOMMENDATION");
-		this.maxRating = this.config.getInt("MAX_RATING");
-		this.minRating = this.config.getInt("MIN_RATING");
+		
+		this.userBias = new double[this.ratingMatrix.getRow()];
+		this.itemBias = new double[this.ratingMatrix.getColumn()];
 		
 		if( readModel )
 		{
@@ -147,13 +167,123 @@ public class MatrixFactorization implements IAlgorithm {
 		}
 	}
 	
-	/**
-	 * this function trains the model
-	 * */
+	@Override
+	public void saveModel(String file) {
+		// TODO Auto-generated method stub
+
+		try {
+			//write user bias
+			PrintWriter ubPrinter = new PrintWriter(file + "_userBias");
+			for( int i = 0 ; i < this.userBias.length ; i++ )
+			{
+				ubPrinter.println(this.userBias[i]);
+			}
+			ubPrinter.flush();
+			ubPrinter.close();
+			
+			//write item bias
+			PrintWriter ibPrinter = new PrintWriter(file + "_itemBias");
+			for( int i = 0 ; i < this.itemBias.length ; i++ )
+			{
+				ibPrinter.println(this.itemBias[i]);
+			}
+			ibPrinter.flush();
+			ibPrinter.close();
+			
+			//user factors
+			PrintWriter uPrinter = new PrintWriter(file + "_userFactors");
+			for( int i = 0 ; i < this.userMatrix.getValues().length ; i++ )
+			{
+				for( int j = 0 ; j < this.userMatrix.getValues()[i].length ; j++ )
+				{
+					uPrinter.print(this.userMatrix.getValues()[i][j] + "\t");
+				}
+				uPrinter.println();
+			}
+			uPrinter.flush();
+			uPrinter.close();
+			
+			//item factors
+			PrintWriter iPrinter = new PrintWriter(file + "_itemFactors");
+			for( int i = 0 ; i < this.itemMatrix.getValues().length ; i++ )
+			{
+				for( int j = 0 ; j < this.itemMatrix.getValues()[i].length ; j++ )
+				{
+					iPrinter.print(this.itemMatrix.getValues()[i][j] + "\t");
+				}
+				iPrinter.println();
+			}
+			iPrinter.flush();
+			iPrinter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void readModel(String file) {
+		// TODO Auto-generated method stub
+
+		try{
+			//read user bias
+			BufferedReader ubReader = new BufferedReader( new FileReader(file + "_userBias") );
+			String line = null;
+			int index1 = 0;
+			while( (line = ubReader.readLine()) != null )
+			{
+				this.userBias[index1++] = Double.parseDouble(line);
+			}
+			ubReader.close();
+			
+			//read item bias
+			BufferedReader ibReader = new BufferedReader( new FileReader(file + "_itemBias") );
+			int index2 = 0;
+			while( (line = ibReader.readLine()) != null )
+			{
+				this.itemBias[index2++] = Double.parseDouble(line);
+			}
+			ibReader.close();
+			
+			//read user factors
+			BufferedReader uReader = new BufferedReader( new FileReader(file + "_userFactors") );
+			int index3 = 0;
+			while( (line = uReader.readLine()) != null )
+			{
+				StringTokenizer tokens = new StringTokenizer( line );
+				int index = 0;
+				while( tokens.hasMoreElements() )
+				{
+					this.userMatrix.set(index3 , index++ , Double.parseDouble(tokens.nextToken()));
+				}
+				index3++;
+			}
+			uReader.close();
+			
+			//read item factors
+			BufferedReader iReader = new BufferedReader( new FileReader(file + "_itemFactors") );
+			int index4 = 0;
+			while( (line = iReader.readLine()) != null )
+			{
+				StringTokenizer tokens = new StringTokenizer( line );
+				int index = 0;
+				while( tokens.hasMoreElements() )
+				{
+					this.itemMatrix.set(index4, index++ , Double.parseDouble(tokens.nextToken()));
+				}
+				index4++;
+			}
+			iReader.close();
+		}catch( IOException e )
+		{
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void build() {
 		// TODO Auto-generated method stub
-
+		
 		if( this.optimization.equals("SGD") )
 		{
 			buildSGD();
@@ -168,12 +298,12 @@ public class MatrixFactorization implements IAlgorithm {
 	}
 	
 	/**
-	 * This function learns a matrix factorization model using Stochastic Gradient Descent 
+	 * SGD learning 
 	 * */
 	public void buildSGD()
 	{
 		double preError = Double.MAX_VALUE;
-		for( int i = 0 ; i < this.Iterations ; i++ )
+		for( int i = 0 ; i < this.iterations ; i++ )
 		{
 			System.out.println("Iteration: " + i);
 			ArrayList<MatrixEntry2D> entries = this.ratingMatrix.getValidEntries();
@@ -189,17 +319,31 @@ public class MatrixFactorization implements IAlgorithm {
 				if( prediction < this.minRating )
 					prediction = this.minRating;
 				double difference = entry.getValue() - prediction;
-				for( int l = 0 ; l < this.latentFactors ; l++ )
+				
+				//update user bias
+				double newUserBias = this.userBias[entry.getRowIndex()] + this.biasLearningRate * ( difference
+						- this.biasUserReg * this.userBias[entry.getRowIndex()] );
+				this.userBias[entry.getRowIndex()] = newUserBias;
+				//update item bias
+				double newItemBias = this.itemBias[entry.getColumnIndex()] + this.biasLearningRate * ( difference
+						- this.biasItemReg * this.itemBias[entry.getColumnIndex()] );				
+				this.itemBias[entry.getColumnIndex()] = newItemBias;
+				
+				//update user and item latent factors
+				for( int j = 0 ; j < this.latentFactors ; j++ )
 				{
-					double tempU = this.userMatrix.get(entry.getRowIndex(), l)  + this.learningRate * ( /*2 **/ 
-							difference * this.itemMatrix.get(entry.getColumnIndex(), l) - this.regUser * 
-							this.userMatrix.get(entry.getRowIndex(), l) );
-					double tempI = this.itemMatrix.get(entry.getColumnIndex(), l) + this.learningRate * ( /*2 **/
-							difference * this.userMatrix.get(entry.getRowIndex(), l) - this.regItem * 
-							this.itemMatrix.get(entry.getColumnIndex(), l) );
-					this.userMatrix.set(entry.getRowIndex(), l, tempU);
-					this.itemMatrix.set(entry.getColumnIndex(), l, tempI);
+					//update user factors
+					double newUserFactors = this.userMatrix.get(entry.getRowIndex(), j) + this.learningRate
+							* ( difference * this.itemMatrix.get(entry.getColumnIndex(), j) - this.userReg
+							* this.userMatrix.get(entry.getRowIndex(), j) );
+					//update item factors
+					double newItemFactors = this.itemMatrix.get(entry.getColumnIndex(), j) + this.learningRate *
+							( difference * this.userMatrix.get(entry.getRowIndex(), j) - this.itemReg * 
+							this.itemMatrix.get(entry.getColumnIndex(), j) );
+					this.userMatrix.set(entry.getRowIndex(), j, newUserFactors);
+					this.itemMatrix.set(entry.getColumnIndex(), j, newItemFactors);
 				}
+				
 				//one rating is only processed once in an iteration
 				entries.remove(r);
 			}
@@ -220,7 +364,6 @@ public class MatrixFactorization implements IAlgorithm {
 //							this.regItem/2 * Math.pow(this.itemMatrix.get(entry.getColumnIndex(), j), 2);
 //				}		
 			}
-					
 			this.logger.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + 
 					" Iteration " + i + " : Error ~ " + error );
 			this.logger.flush();
@@ -231,130 +374,10 @@ public class MatrixFactorization implements IAlgorithm {
 				this.logger.flush();
 				break;
 			}
-					
 			// learning rate update strategy 
 			updateLearningRate( error , preError );
 			
 			preError = error;	
-			logger.flush();
-		}
-	}
-	
-	/**
-	 * This function learns a matrix factorization model using Alternative Least Square  
-	 * refer to "Large-scale Parallel Collaborative Filtering for the Netﬂix Prize"
-	 * */
-	public void buildALS()
-	{
-		double preError = Double.MAX_VALUE;
-		Matrix identify = Matrix.identity(this.latentFactors, this.latentFactors);
-		for( int i = 0 ; i < this.Iterations ; i++ )
-		{
-			System.out.println("Iteration: " + i);
-			double error = 0; //overall error of this iteration
-			//fix item matrix M, solve user matrix U
-			for( int j = 0 ; j < this.userMatrix.getRows() ; j++ )
-			{
-				//latent factor of items that are rated by user j
-				int n = this.ratingMatrix.getUserRatingNumber(j);//number of items rated by user j
-				double[][] m = new double[n][this.latentFactors];
-				int index = 0;
-				for( int k = 0 ; k < this.itemMatrix.getRows() ; k++ )
-				{
-					if( !Double.isNaN(this.ratingMatrix.get(j, k)) )
-					{
-						m[index++] = this.itemMatrix.getRowValues(k);
-					}
-				}
-				Matrix M = new Matrix(m);
-				//step 1:
-				Matrix A = M.transpose().times(M).plus(identify.times(this.regUser).times(n));
-				//step 2:
-				double[][] r = new double[1][n];//ratings of this user
-				int index1 = 0;
-				for( int k = 0 ; k < this.ratingMatrix.getColumn() ; k++ )
-				{
-					Double rating = this.ratingMatrix.getRatingMatrix().get(j).get(k);
-					if( rating != null )
-					{
-						r[0][index1++] = rating.doubleValue();
-					}
-				}
-				Matrix R = new Matrix(r);
-				Matrix V = M.transpose().times(R.transpose());
-				//step 3: the updated user matrix wrt user j
-				Matrix uj = A.inverse().times(V);
-				this.userMatrix.getValues()[j] = uj.transpose().getArray()[0];
-			}
-			//fix user matrix U, solve item matrix M
-			for( int j = 0 ; j < this.itemMatrix.getRows() ; j++ )
-			{
-				//latent factor of users that have rated item j
-				int n = this.ratingMatrix.getItemRatingNumber(j);//number of users rate item j
-				double[][] u = new double[n][this.latentFactors];
-				int index = 0;
-				for( int k = 0 ; k < this.userMatrix.getRows() ; k++ )
-				{
-					if( !Double.isNaN(this.ratingMatrix.get(k, j)) )
-					{
-						u[index++] = this.userMatrix.getRowValues(k);
-					}
-				}
-				if( u.length == 0 )
-					continue;
-				Matrix U = new Matrix(u);
-				
-				//step 1:
-				Matrix A = U.transpose().times(U).plus(identify.times(this.regItem).times(n));
-				
-				//step 2:
-				double[][] r = new double[1][n];//ratings of this item
-				int index1 = 0;
-				for( int k = 0 ; k < this.ratingMatrix.getRow() ; k++ )
-				{
-					Double rating = this.ratingMatrix.getRatingMatrix().get(k).get(j);
-					if( rating != null )
-					{
-						r[0][index1++] = rating.doubleValue();
-					}
-				}
-				Matrix R = new Matrix(r);
-				Matrix V = U.transpose().times(R.transpose());
-				//step 3: the updated item matrix wrt item j
-				Matrix mj = A.inverse().times(V);
-				this.itemMatrix.getValues()[j] = mj.transpose().getArray()[0];
-			}
-			//check for convergence
-			//error
-			ArrayList<MatrixEntry2D> entries = this.ratingMatrix.getValidEntries();
-			for( int k = 0 ; k < entries.size() ; k++ )
-			{
-				MatrixEntry2D entry = entries.get(k);
-				double prediction = predict( entry.getRowIndex() , entry.getColumnIndex() , false );
-				if( prediction > this.maxRating )
-					prediction = this.maxRating;
-				if( prediction < this.minRating )
-					prediction = this.minRating;
-				error = error + Math.abs(entry.getValue() - prediction);
-				for( int j = 0 ; j < this.latentFactors ; j++ )
-				{
-					error = error + this.regUser/2 * Math.pow(this.userMatrix.get(entry.getRowIndex(), j), 2) + 
-							this.regItem/2 * Math.pow(this.itemMatrix.get(entry.getColumnIndex(), j), 2);
-				}		
-			}
-					
-			this.logger.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + 
-					" Iteration " + i + " : Error ~ " + error );
-			this.logger.flush();
-			//check for convergence
-			if( Math.abs(error - preError) <= this.convergence && error <= preError )
-			{
-				logger.println("The algorithm convergences.");
-				this.logger.flush();
-				break;
-			}
-			
-			preError = error;
 			logger.flush();
 		}
 	}
@@ -376,22 +399,31 @@ public class MatrixFactorization implements IAlgorithm {
 			if( Math.abs(error) < Math.abs(preError) )
 			{
 				this.learningRate = (1 + 0.05) * this.learningRate;
+				this.biasLearningRate = (1 + 0.05) * this.biasLearningRate;
 				logger.println("Increase learning rate by 5%.");
 				this.userMatrixPrevious = this.userMatrix.clone();
 				this.itemMatrixPrevious = this.itemMatrix.clone();
 			}else if( Math.abs(error) > Math.abs(preError) )
 			{
 				this.learningRate = 0.5 * this.learningRate;
+				this.biasLearningRate = 0.5 * this.biasLearningRate;
 				this.userMatrix = this.userMatrixPrevious.clone();//roll back to previous iteration
 				this.itemMatrix = this.itemMatrixPrevious.clone();
 				logger.println("Decrease learning rate by 50%.");
 				}
 		}else if( update == 3 ) {//decaying learning rate by a constant rate
-			this.learningRate = this.learningRate * this.config.getDouble("LEARNING_RATING_DECAY");
+			double decay = this.config.getDouble("LEARNING_RATING_DECAY");
+			this.learningRate = this.learningRate * decay;
+			this.biasLearningRate = this.biasLearningRate * decay;
 			this.userMatrixPrevious = this.userMatrix.clone();
 			this.itemMatrixPrevious = this.itemMatrix.clone();
 		}
 	}
+	
+	/**
+	 * ALS learning
+	 * */
+	public void buildALS(){}
 	
 	/**
 	 * this function predicts a user to an item
@@ -403,25 +435,14 @@ public class MatrixFactorization implements IAlgorithm {
 		double prediction = 0;
 		for( int i = 0 ; i < this.latentFactors ; i++ )
 		{
-			prediction = prediction + this.userMatrix.getValues()[user][i] *
+			prediction = prediction + this.userMatrix.getValues()[user][i] * 
 					this.itemMatrix.getValues()[item][i];
 		}
-
-		if( rank )
-		{
-//			if( !Double.isNaN(this.ratingMatrix.getUsersMean().get(user)) )
-//			{
-//				prediction += this.ratingMatrix.getUsersMean().get(user);
-//			}
-//			if( !Double.isNaN(this.ratingMatrix.getItemsMean().get(item)) )
-//			{
-//				prediction += this.ratingMatrix.getItemsMean().get(item);
-//			}		
-			return prediction;
-		}else
-		{
-			return prediction;
-		}
+//		if( rank )
+//			return prediction;
+		prediction += this.globalAverage + this.userBias[user] + this.itemBias[item];
+		
+		return prediction;
 	}
 	
 	/**
@@ -430,15 +451,11 @@ public class MatrixFactorization implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
-		//how many train/test ratings of this user are sufficient?
-		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
-			return null;
-		
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
 		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
 		{
-			if(  this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
+			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
 			{
 				//this item has not been rated by the item
 				ResultUnit unit = new ResultUnit( userIndex , i , predict( userIndex , i , true) );
@@ -457,84 +474,6 @@ public class MatrixFactorization implements IAlgorithm {
 //		System.out.println();
 		return result;
 	}
-	
-	@Override
-	public void saveModel(String file) {
-		// TODO Auto-generated method stub
-		try{
-			//save users latent factors
-			PrintWriter printer1 = new PrintWriter(file+"_user");
-			for( int i = 0 ; i < this.userMatrix.getRows() ; i++ )
-			{
-				for( int j = 0 ; j < this.userMatrix.getColumns() ; j++ )
-				{
-					printer1.print(this.userMatrix.get(i, j) + "\t");
-				}
-				printer1.println();
-			}
-			printer1.flush();
-			printer1.close();
-			
-			//save items latent factors
-			PrintWriter printer2 = new PrintWriter(file+"_item");
-			for( int i = 0 ; i < this.itemMatrix.getRows() ; i++ )
-			{
-				for( int j = 0 ; j < this.itemMatrix.getColumns() ; j++ )
-				{
-					printer2.print(this.itemMatrix.get(i, j) + "\t");
-				}
-				printer2.println();
-			}
-			printer2.flush();
-			printer2.close();
-		}catch( IOException e )
-		{
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void readModel(String file) {
-		// TODO Auto-generated method stub
-		try{
-			//read user latent factors
-			BufferedReader reader1 = new BufferedReader( new FileReader(file+"_user") );
-			String line = null;
-			int u1 = 0;
-			while( (line = reader1.readLine()) != null )
-			{
-				StringTokenizer tokens = new StringTokenizer( line.trim() );
-				int u2 = 0;
-				while( tokens.hasMoreElements() )
-				{
-					this.userMatrix.set(u1, u2, Double.parseDouble(tokens.nextToken()));
-					u2++;
-				}
-				u1++;
-			}
-			reader1.close();
-			
-			//read item latent factors
-			BufferedReader reader2 = new BufferedReader( new FileReader(file+"_item") );
-			String line2 = null;
-			int i1 = 0;
-			while( (line2 = reader2.readLine()) != null )
-			{
-				StringTokenizer tokens = new StringTokenizer( line2.trim() );
-				int i2 = 0;
-				while( tokens.hasMoreElements() )
-				{
-					this.itemMatrix.set(i1, i2, Double.parseDouble(tokens.nextToken()));
-					i2++;
-				}
-				i1++;
-			}
-			reader2.close();
-		}catch( IOException e )
-		{
-			e.printStackTrace();
-		}
-	}
 
 	
 	/**
@@ -544,14 +483,12 @@ public class MatrixFactorization implements IAlgorithm {
 		return ratingMatrix;
 	}
 
-
 	/**
 	 * @param ratingMatrix the ratingMatrix to set
 	 */
 	public void setRatingMatrix(RatingMatrix ratingMatrix) {
 		this.ratingMatrix = ratingMatrix;
 	}
-
 
 	/**
 	 * @return the userMatrix
@@ -560,14 +497,12 @@ public class MatrixFactorization implements IAlgorithm {
 		return userMatrix;
 	}
 
-
 	/**
 	 * @param userMatrix the userMatrix to set
 	 */
 	public void setUserMatrix(LatentMatrix userMatrix) {
 		this.userMatrix = userMatrix;
 	}
-
 
 	/**
 	 * @return the itemMatrix
@@ -576,27 +511,11 @@ public class MatrixFactorization implements IAlgorithm {
 		return itemMatrix;
 	}
 
-
 	/**
 	 * @param itemMatrix the itemMatrix to set
 	 */
 	public void setItemMatrix(LatentMatrix itemMatrix) {
 		this.itemMatrix = itemMatrix;
-	}
-
-
-	/**
-	 * @return the logger
-	 */
-	public PrintWriter getLogger() {
-		return logger;
-	}
-
-	/**
-	 * @param logger the logger to set
-	 */
-	public void setLogger(PrintWriter logger) {
-		this.logger = logger;
 	}
 
 	/**
@@ -606,7 +525,6 @@ public class MatrixFactorization implements IAlgorithm {
 		return initialization;
 	}
 
-
 	/**
 	 * @param initialization the initialization to set
 	 */
@@ -614,6 +532,33 @@ public class MatrixFactorization implements IAlgorithm {
 		this.initialization = initialization;
 	}
 
+	/**
+	 * @return the userBias
+	 */
+	public double[] getUserBias() {
+		return userBias;
+	}
+
+	/**
+	 * @param userBias the userBias to set
+	 */
+	public void setUserBias(double[] userBias) {
+		this.userBias = userBias;
+	}
+
+	/**
+	 * @return the itemBias
+	 */
+	public double[] getItemBias() {
+		return itemBias;
+	}
+
+	/**
+	 * @param itemBias the itemBias to set
+	 */
+	public void setItemBias(double[] itemBias) {
+		this.itemBias = itemBias;
+	}
 
 	/**
 	 * @return the latentFactors
@@ -622,7 +567,6 @@ public class MatrixFactorization implements IAlgorithm {
 		return latentFactors;
 	}
 
-
 	/**
 	 * @param latentFactors the latentFactors to set
 	 */
@@ -630,22 +574,19 @@ public class MatrixFactorization implements IAlgorithm {
 		this.latentFactors = latentFactors;
 	}
 
-
 	/**
 	 * @return the iterations
 	 */
 	public int getIterations() {
-		return Iterations;
+		return iterations;
 	}
-
 
 	/**
 	 * @param iterations the iterations to set
 	 */
 	public void setIterations(int iterations) {
-		Iterations = iterations;
+		this.iterations = iterations;
 	}
-
 
 	/**
 	 * @return the learningRate
@@ -653,7 +594,6 @@ public class MatrixFactorization implements IAlgorithm {
 	public double getLearningRate() {
 		return learningRate;
 	}
-
 
 	/**
 	 * @param learningRate the learningRate to set
@@ -663,31 +603,73 @@ public class MatrixFactorization implements IAlgorithm {
 	}
 
 	/**
-	 * @return the regUser
+	 * @return the biasLearningRate
 	 */
-	public double getRegUser() {
-		return regUser;
+	public double getBiasLearningRate() {
+		return biasLearningRate;
 	}
 
 	/**
-	 * @param regUser the regUser to set
+	 * @param biasLearningRate the biasLearningRate to set
 	 */
-	public void setRegUser(double regUser) {
-		this.regUser = regUser;
+	public void setBiasLearningRate(double biasLearningRate) {
+		this.biasLearningRate = biasLearningRate;
 	}
 
 	/**
-	 * @return the regItem
+	 * @return the userReg
 	 */
-	public double getRegItem() {
-		return regItem;
+	public double getUserReg() {
+		return userReg;
 	}
 
 	/**
-	 * @param regItem the regItem to set
+	 * @param userReg the userReg to set
 	 */
-	public void setRegItem(double regItem) {
-		this.regItem = regItem;
+	public void setUserReg(double userReg) {
+		this.userReg = userReg;
+	}
+
+	/**
+	 * @return the itemReg
+	 */
+	public double getItemReg() {
+		return itemReg;
+	}
+
+	/**
+	 * @param itemReg the itemReg to set
+	 */
+	public void setItemReg(double itemReg) {
+		this.itemReg = itemReg;
+	}
+
+	/**
+	 * @return the biasUserReg
+	 */
+	public double getBiasUserReg() {
+		return biasUserReg;
+	}
+
+	/**
+	 * @param biasUserReg the biasUserReg to set
+	 */
+	public void setBiasUserReg(double biasUserReg) {
+		this.biasUserReg = biasUserReg;
+	}
+
+	/**
+	 * @return the biasItemReg
+	 */
+	public double getBiasItemReg() {
+		return biasItemReg;
+	}
+
+	/**
+	 * @param biasItemReg the biasItemReg to set
+	 */
+	public void setBiasItemReg(double biasItemReg) {
+		this.biasItemReg = biasItemReg;
 	}
 
 	/**
@@ -705,6 +687,20 @@ public class MatrixFactorization implements IAlgorithm {
 	}
 
 	/**
+	 * @return the globalAverage
+	 */
+	public double getGlobalAverage() {
+		return globalAverage;
+	}
+
+	/**
+	 * @param globalAverage the globalAverage to set
+	 */
+	public void setGlobalAverage(double globalAverage) {
+		this.globalAverage = globalAverage;
+	}
+
+	/**
 	 * @return the topN
 	 */
 	public int getTopN() {
@@ -716,6 +712,20 @@ public class MatrixFactorization implements IAlgorithm {
 	 */
 	public void setTopN(int topN) {
 		this.topN = topN;
+	}
+
+	/**
+	 * @return the optimization
+	 */
+	public String getOptimization() {
+		return optimization;
+	}
+
+	/**
+	 * @param optimization the optimization to set
+	 */
+	public void setOptimization(String optimization) {
+		this.optimization = optimization;
 	}
 
 	/**
@@ -745,6 +755,28 @@ public class MatrixFactorization implements IAlgorithm {
 	public void setMinRating(int minRating) {
 		this.minRating = minRating;
 	}
+
 	
-	
+	/**
+	 * @return the logger
+	 */
+	public PrintWriter getLogger() {
+		return logger;
+	}
+
+	/**
+	 * @param logger the logger to set
+	 */
+	public void setLogger(PrintWriter logger) {
+		this.logger = logger;
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

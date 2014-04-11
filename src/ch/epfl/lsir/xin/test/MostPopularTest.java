@@ -96,6 +96,9 @@ public class MostPopularTest {
 				dataset.getItemIDs().size() );
 		for( int i = 0 ; i < testRatings.size() ; i++ )
 		{
+			//only consider 5-star rating in the test set
+			if( testRatings.get(i).getValue() < 5 )
+				continue;
 			testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 					itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 		}
@@ -111,10 +114,15 @@ public class MostPopularTest {
 		logger.flush();
 		
 		HashMap<Integer , ArrayList<ResultUnit>> results = new HashMap<Integer , ArrayList<ResultUnit>>();
-		for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
+		for( int i = 0 ; i < testRatingMatrix.getRow() ; i++ )
 		{
 			ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
-			results.put(i, rec);
+			if( rec == null )
+				continue;
+			int total = testRatingMatrix.getUserRatingNumber(i);
+			if( total == 0 )//this user is ignored
+				continue;
+			results.put(i, rec);		
 		}
 
 		RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
@@ -134,5 +142,13 @@ public class MostPopularTest {
 		logger.flush();
 		logger.close();
 	}
+	/** MovieLens100k
+	 Precision@N: 0.07347715736040637
+	Recall@N: 0.16619890977893928
+	MAP@N: 0.11575719120135364
+	MRR@N: 0.2342055434695027
+	NDCG@N: 0.28388440883176297
+	AUC@N: 0.6151238439113035
+	 * */
 
 }
