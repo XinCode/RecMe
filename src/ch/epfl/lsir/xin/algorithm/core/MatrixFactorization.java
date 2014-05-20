@@ -431,8 +431,8 @@ public class MatrixFactorization implements IAlgorithm {
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
 		//how many train/test ratings of this user are sufficient?
-		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
-			return null;
+//		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
+//			return null;
 		
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)

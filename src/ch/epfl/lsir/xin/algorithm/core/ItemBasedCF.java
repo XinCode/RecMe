@@ -151,8 +151,7 @@ public class ItemBasedCF implements IAlgorithm {
 	}
 	
 	/**
-	 * This function calculates the similarity matrix for users
-	 * The similarity is in the range of [0,1]
+	 * This function calculates the similarity matrix for items
 	 * */
 	public void similarityMatrixCalculation()
 	{
@@ -252,16 +251,17 @@ public class ItemBasedCF implements IAlgorithm {
 	@Override
 	public void build() {
 		// TODO Auto-generated method stub
-		
+		this.similarityMatrixCalculation();
 	}
 	
 	/**
 	 * This function predicts a user's rating to an item
 	 * @param: index of the user
 	 * @param: index of the item
+	 * @param: if the prediction is for ranking
 	 * @return: the predicted rating
 	 * */
-	public double predict( int userIndex , int itemIndex )
+	public double predict( int userIndex , int itemIndex , boolean rank )
 	{
 		ArrayList<SItem> similarItems = new ArrayList<SItem>();
 		int neighbors = this.config.getInt("NEIGHBOUR_SIZE");
@@ -270,17 +270,16 @@ public class ItemBasedCF implements IAlgorithm {
 		{
 			Double value = this.ratingMatrix.getRatingMatrix().get(userIndex).get(i);
 			//this item is also rated by the target user
-			if( value != null )
+			if( value != null && this.similarityMatrix[itemIndex][i] > 0 )
 			{
 				//get the similarity information
-				SItem su = new SItem( i , value.doubleValue() , this.similarityMatrix[itemIndex][i] );
-				similarItems.add(su);
+				SItem si = new SItem( i , value.doubleValue() , this.similarityMatrix[itemIndex][i] );
+				similarItems.add(si);
 			}
 		}
-//		System.out.println("Neighbour size: " + similarUsers.size());
-		Collections.sort(similarItems);
+		
 		//collaborative filtering cannot work: first user-average and then global-average
-		if( similarItems.size() < 1 || similarItems.get(similarItems.size()-1).getSimilarity() == 0 )
+		if( similarItems.size() < 1 /*|| similarItems.get(similarItems.size()-1).getSimilarity() == 0*/ )
 		{
 //			System.out.println("Cannot be predicted by UserCF");
 			double itemM = this.ratingMatrix.getItemMean(itemIndex);
@@ -291,31 +290,45 @@ public class ItemBasedCF implements IAlgorithm {
 				return this.ratingMatrix.getAverageRating();
 			}
 		}
+		Collections.sort(similarItems);
 		
 		double totalSimilarity = 0;
 		double prediction = 0;
 		int counter = 0;
+		double simRanking = 0;
 		for( int i = similarItems.size() - 1 ; i >= 0 ; i-- )
 		{
 			totalSimilarity = totalSimilarity + Math.abs(similarItems.get(i).getSimilarity());
+			simRanking += similarItems.get(i).getSimilarity();
 			prediction = prediction + similarItems.get(i).getSimilarity() * (similarItems.get(i).getRating() 
 					- this.ratingMatrix.getItemsMean().get(similarItems.get(i).getItemIndex()));
-			if(  Double.isNaN(totalSimilarity) || totalSimilarity == 0  )
-			{
-				System.out.println(similarItems.get(i).getSimilarity() + " ,  "
-						+ similarItems.get(i).getRating() + " pred: " + prediction);
-			}
+//			if(  Double.isNaN(totalSimilarity) || totalSimilarity == 0  )
+//			{
+//				System.out.println(similarItems.get(i).getSimilarity() + " ,  "
+//						+ similarItems.get(i).getRating() + " pred: " + prediction);
+//			}
 			counter++;
 			if( counter == neighbors )
 				break;
 		}
 		if( Double.isNaN(totalSimilarity) || totalSimilarity == 0 )
 		{
-			System.out.println("Total similarity is NaN.");
-			return Double.NaN;
+			double itemM = this.ratingMatrix.getItemMean(itemIndex); 
+			if( !Double.isNaN(itemM) )
+			{
+				return itemM;
+			}else{
+				return this.ratingMatrix.getAverageRating();
+			}
 		}
-		prediction = prediction / totalSimilarity;	
-		prediction = prediction + this.ratingMatrix.getItemsMean().get(itemIndex);
+		if( rank )
+		{
+			return totalSimilarity;
+//			return simRanking;
+		}else{
+			prediction = prediction / totalSimilarity;	
+			prediction = prediction + this.ratingMatrix.getItemMean(itemIndex);
+		}
 		
 		return prediction;
 	}
@@ -324,35 +337,35 @@ public class ItemBasedCF implements IAlgorithm {
 	 * This function generates a recommendation list for a given user
 	 * @param: user
 	 * */
-//	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
-//	{
-//		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
-//		//find all item candidate list (items that are not rated by the user)
-//		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
-//		{
-//			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
-//			{
-//				//this item has not been rated by the user
-//				ResultUnit unit = new ResultUnit( userIndex , i , /*predict(userIndex , i)*/
-//						getPredictionRanking(userIndex , i) );
-//				recommendationList.add(unit);
-//			}
-//		}
-//		//sort the recommendation list
-//		Collections.sort(recommendationList);
-//		ArrayList<ResultUnit> result = new ArrayList<ResultUnit>();
-//		int top = 0;
-//		for( int i = recommendationList.size() - 1 ; i >= 0 ; i-- )
-//		{
-//			result.add(recommendationList.get(i));
-//			top++;			
-////			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
-//			if( top == this.topN )
-//				break;
-//		}
-////		System.out.println();
-//		return result;
-//	}
+	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
+	{
+		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
+		//find all item candidate list (items that are not rated by the user)
+		for( int i = 0 ; i < this.ratingMatrix.getColumn() ; i++ )
+		{
+			if( this.ratingMatrix.getRatingMatrix().get(userIndex).get(i) == null )
+			{
+				//this item has not been rated by the user
+				double prediction = predict(userIndex , i , true);
+				ResultUnit unit = new ResultUnit( userIndex , i , prediction );
+				recommendationList.add(unit);
+			}
+		}
+		//sort the recommendation list
+		Collections.sort(recommendationList);
+		ArrayList<ResultUnit> result = new ArrayList<ResultUnit>();
+		int top = 0;
+		for( int i = recommendationList.size() - 1 ; i >= 0 ; i-- )
+		{
+			result.add(recommendationList.get(i));
+			top++;			
+//			System.out.print(recommendationList.get(i).getPrediciton() + " , ");
+			if( top == this.topN )
+				break;
+		}
+//		System.out.println();
+		return result;
+	}
 	
 	/**
 	 * @return the ratingMatrix

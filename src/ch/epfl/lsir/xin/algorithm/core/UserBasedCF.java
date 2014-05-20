@@ -242,6 +242,8 @@ public class UserBasedCF implements IAlgorithm {
 		if( rank )
 		{
 //			prediction = prediction / totalSimilarity;	
+//			return this.getPredictionRanking(userIndex, itemIndex);
+			return totalSimilarity;
 		}else{
 			prediction = prediction / totalSimilarity;	
 			prediction = prediction + this.ratingMatrix.getUsersMean().get(userIndex);
@@ -309,8 +311,8 @@ public class UserBasedCF implements IAlgorithm {
 	 * */
 	public ArrayList<ResultUnit> getRecommendationList( int userIndex )
 	{
-		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
-			return null;
+//		if( this.ratingMatrix.getUserRatingNumber(userIndex) < 10 )
+//			return null;
 		
 		ArrayList<ResultUnit> recommendationList = new ArrayList<ResultUnit>();
 		//find all item candidate list (items that are not rated by the user)
@@ -320,8 +322,7 @@ public class UserBasedCF implements IAlgorithm {
 			{
 				//this item has not been rated by the user
 				double prediction = predict(userIndex , i , true);
-				ResultUnit unit = new ResultUnit( userIndex , i , prediction
-						/*getPredictionRanking(userIndex , i) */);
+				ResultUnit unit = new ResultUnit( userIndex , i , prediction);
 				recommendationList.add(unit);
 			}
 		}

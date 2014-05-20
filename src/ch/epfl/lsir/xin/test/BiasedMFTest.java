@@ -132,8 +132,8 @@ public class BiasedMFTest {
 					dataset.getItemIDs().size() );
 			for( int i = 0 ; i < testRatings.size() ; i++ )
 			{
-				if( testRatings.get(i).getValue() < 5 )
-					continue;
+//				if( testRatings.get(i).getValue() < 5 )
+//					continue;
 				testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 						itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 			}
@@ -199,7 +199,8 @@ public class BiasedMFTest {
 						continue;
 					results.put(i, rec);
 				}
-				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
+				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , 
+						testRatingMatrix , trainRatingMatrix );
 				precision = generator.getPrecisionN();
 				totalPrecision = totalPrecision + precision;
 				recall = generator.getRecallN();

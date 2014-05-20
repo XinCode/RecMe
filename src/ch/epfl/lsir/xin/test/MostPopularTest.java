@@ -97,8 +97,8 @@ public class MostPopularTest {
 		for( int i = 0 ; i < testRatings.size() ; i++ )
 		{
 			//only consider 5-star rating in the test set
-			if( testRatings.get(i).getValue() < 5 )
-				continue;
+//			if( testRatings.get(i).getValue() < 5 )
+//				continue;
 			testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 					itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 		}
@@ -125,7 +125,8 @@ public class MostPopularTest {
 			results.put(i, rec);		
 		}
 
-		RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
+		RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , 
+				testRatingMatrix , trainRatingMatrix );
 		System.out.println("Precision@N: " + generator.getPrecisionN());
 		System.out.println("Recall@N: " + generator.getRecallN());
 		System.out.println("MAP@N: " + generator.getMAPN());

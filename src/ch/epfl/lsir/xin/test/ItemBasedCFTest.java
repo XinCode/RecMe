@@ -19,7 +19,6 @@
 package ch.epfl.lsir.xin.test;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -159,7 +158,7 @@ public class ItemBasedCFTest {
 			{
 				NumericRating rating = testRatings.get(i);
 				double prediction = algo.predict(userIDIndexMapping.get(rating.getUserID()), 
-						itemIDIndexMapping.get(rating.getItemID()));
+						itemIDIndexMapping.get(rating.getItemID()) , false);
 				if( prediction > algo.getMaxRating() )
 					prediction = algo.getMaxRating();
 				if( prediction < algo.getMinRating() )
@@ -188,10 +187,18 @@ public class ItemBasedCFTest {
 				HashMap<Integer , ArrayList<ResultUnit>> results = new HashMap<Integer , ArrayList<ResultUnit>>();
 				for( int i = 0 ; i < trainRatingMatrix.getRow() ; i++ )
 				{
+//					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
+//					results.put(i, rec);
 					ArrayList<ResultUnit> rec = algo.getRecommendationList(i);
+					if( rec == null )
+						continue;
+					int total = testRatingMatrix.getUserRatingNumber(i);
+					if( total == 0 )//this user is ignored
+						continue;
 					results.put(i, rec);
 				}
-				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
+				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , 
+						testRatingMatrix , trainRatingMatrix);
 				precision = generator.getPrecisionN();
 				totalPrecision = totalPrecision + precision;
 				recall = generator.getRecallN();

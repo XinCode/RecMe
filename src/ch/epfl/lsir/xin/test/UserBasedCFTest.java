@@ -132,8 +132,8 @@ public class UserBasedCFTest {
 					dataset.getItemIDs().size() );
 			for( int i = 0 ; i < testRatings.size() ; i++ )
 			{
-				if( testRatings.get(i).getValue() < 5 )
-					continue;
+//				if( testRatings.get(i).getValue() < 5 )
+//					continue;
 				testRatingMatrix.set(userIDIndexMapping.get(testRatings.get(i).getUserID()), 
 						itemIDIndexMapping.get(testRatings.get(i).getItemID()), testRatings.get(i).getValue() );
 			}
@@ -209,7 +209,8 @@ public class UserBasedCFTest {
 //					}
 //					System.out.println("**********");
 				}
-				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , testRatingMatrix);
+				RankResultGenerator generator = new RankResultGenerator(results , algo.getTopN() , 
+						testRatingMatrix , trainRatingMatrix );
 				precision = generator.getPrecisionN();
 				totalPrecision = totalPrecision + precision;
 				recall = generator.getRecallN();
@@ -240,14 +241,6 @@ public class UserBasedCFTest {
 		// MovieLens100k
 		//MAE: 0.7343907480119425 RMSE: 0.9405808357192891 (MovieLens 100K, shrinkage 25, neighbor size 60, PCC)
 		//MAE: 0.7522376630596646 RMSE: 0.9520931265724659 (MovieLens 100K, no shrinkage , neighbor size 40, COSINE)
-		/**
-		 * Precision@N: 0.09775251511582342
-			Recall@N: 0.19148039452057336
-			MAP@N: 0.1426564541136997
-			MRR@N: 0.30048667156091896
-			NDCG@N: 0.3470226035028776
-			AUC@N: 0.6447526748573156
-		 * */
 		logger.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\n" + 
 				"MAE: " + totalMAE/F + " RMSE: " + totalRMSE/F + "\n" + 
 				"Precision@N: " + totalPrecision/F + "\n" + 
